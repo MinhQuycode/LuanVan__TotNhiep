@@ -1,0 +1,5 @@
+export const GET_CHAIR_REQUEST = "GET_CHAIR_REQUEST";
+export const GET_CHAIR_SUCCESS = "GET_CHAIR_SUCCESS";
+export const GET_CHAIR_FAILED = "GET_CHAIR_FAILED";
+//Đặt vé
+export const BOOK_TICKET = "BOOK_TICKET";

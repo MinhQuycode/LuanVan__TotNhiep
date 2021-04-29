@@ -1,0 +1,29 @@
+.trailer{
+    height: auto;
+    .image{
+        width: 100%;
+    }
+    .btn__trailer{
+        background-color: orangered;
+        overflow: hidden;
+        border-radius: 100%;
+        position: absolute;
+        left: 47.6%;
+        top: 50%;
+        transition: all 1s;
+    }
+    &:hover{
+        .btn__trailer{
+            transform: scale(1.2);
+            
+        }
+    }
+    .modal-video{
+        top:4% !important;
+    }
+    .modal-video-movie-wrap{
+        button{
+            display: none;
+        }
+    }
+}

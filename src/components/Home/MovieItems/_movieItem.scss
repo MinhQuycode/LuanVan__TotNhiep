@@ -1,0 +1,93 @@
+.movieItem{
+    margin-bottom: 3rem;
+    height: 393px;
+    margin-right: 15px;
+    .movieItem__img{
+        position: relative;
+        .img__link{
+            .img__movie{
+                display: block;
+                width: 100%;
+                height: 350px;
+            }
+        }
+    }
+    .showing__head{
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        width: 100%;
+        margin-top: 15px;
+        color: #333;
+        font-size: 16px;
+        text-transform: capitalize;
+        font-weight: 600;
+        line-height: 20px;
+        .nameMovie{
+            white-space: nowrap; 
+            max-width: 150px; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+        .showing__age{
+            display: inline-block;
+            text-align: center;
+            min-width: 30px;
+            border-radius: 4px;
+            background: #fb4226;
+            color: #fff;
+            font-size: 14px;
+            padding: 0 5px;
+            margin-right: 8px;
+            font-weight: 600;
+            line-height: 40px;
+
+        }
+        .showing__point{
+            width: 55px;
+            height: 40px;
+            bottom: unset;
+            text-align: center;
+            font-weight: 600;
+            background: rgba(12,27,54,.8);
+            border-radius: 4px;
+            border: 1px solid #1f2e46;
+            color: white;
+            .star{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                img{
+                    width: 11px;
+                }
+            }
+        }
+    }
+    .showing__btn{
+        
+        .btn__movie{
+            margin-top: 15px;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            background-color: orangered;
+            color: white;
+            font-weight: 600;
+            border-radius: 5px;
+            display: none;
+            font-size: 17px;
+        }
+    }
+        
+    &:hover{
+            .btn__movie{
+                display: block;
+            }
+            .showing__head{
+                display: none;
+            }
+        }
+    
+}

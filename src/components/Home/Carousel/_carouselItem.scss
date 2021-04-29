@@ -1,0 +1,25 @@
+#carousel{
+   margin-top: 3rem;
+   width: 100%;
+   button.slick-arrow.slick-next{
+       position: absolute;
+       right: 48px;
+   }
+   button.slick-arrow.slick-prev{
+    position: absolute;
+    left: 30px;
+    z-index: 2;
+   }
+   ul.slick-dots{
+       bottom: 50px;
+   }
+   .slick-dots li button:before{
+       font-size: 10px;
+       color: white;
+   }
+   .slick-next:before, .slick-prev:before{
+       font-size: 40px;
+       color: orangered;
+       
+   }
+}
