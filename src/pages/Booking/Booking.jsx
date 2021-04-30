@@ -16,7 +16,7 @@ export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
   // console.log(inforBK)
   let chairList = useSelector((state) => state.chair.chairList);
-  // console.log(chairList.length)
+  console.log(chairList);
   let error = useSelector((state) => state.chair.error);
   // console.log(error);
   const { id } = useParams();
@@ -50,6 +50,7 @@ export default function Booking(props) {
       break;   
     case 140:
     case 154:
+    case 168:
       let listChair1 = [...chairList];
       var result = chunkArray(listChair1,14);
       break;  
@@ -81,7 +82,7 @@ export default function Booking(props) {
                 <p>{inforBK?.diaChi}</p>
               </div>
             </div>
-            {/* <TimeBooking/> */}
+            <TimeBooking/>
           </div>
           <div className="row screen">
             <img src={screen} alt="anh"/>

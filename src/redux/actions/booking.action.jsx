@@ -49,20 +49,19 @@ export const bookChairAction = (maGhe,giaVe,tenGhe,hang) =>{
 }
 
 
-export const bookingTicketAPI = (maLichChieu, danhSachVe) => {
+export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,user_id) => {
     return async (dispatch) => {
       try {
         const user = JSON.parse(localStorage.getItem("userLogin"));
         const res = await axios({
           method: "POST",
-          url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+          url: "http://localhost:8000/api/booking",
           data: {
-            maLichChieu,    
-            danhSachVe,
-            taiKhoanNguoiDung: user.taiKhoan,
-          },
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            maLichChieu,   
+            totalAmount,
+            quantity,
+            danhSachVe, 
+            user_id,
           },
         });
       } catch (error) {

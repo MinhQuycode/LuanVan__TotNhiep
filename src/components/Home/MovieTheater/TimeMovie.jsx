@@ -15,7 +15,7 @@ function TimeMovie() {
     // console.log(userSignIn);
 
     const handleChoiceShowsTime = (id) => {
-      if (userSignIn?.access_token.length > 0) {
+      if (userSignIn?.access_token?.length > 0) {
         history.push({ pathname: `/booking/${id}`})
       } else {
         history.push({pathname: '/login'});

@@ -19,15 +19,19 @@ export const getInforAccountFailed = (error) =>{
     }
 }
 
-export const getInforAccountAPI = (account) =>{
+export const getInforAccountAPI = () =>{
     return async(dispatch) =>{
         dispatch(getInforAccountRequest())
         try {
+            const user = JSON.parse(localStorage.getItem("userLogin"));
             const res = await axios({
-                method:'POST',
-                url:`https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
-                data:account,
+                method:'GET',
+                url:`http://localhost:8000/api/user`,
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`,
+                  },
             })
+            
             dispatch(getInforAccountSuccess(res.data))
         } catch (error) {
             dispatch(getInforAccountFailed(error))

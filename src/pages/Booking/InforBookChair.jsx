@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {bookingTicketAPI} from "./../../redux/actions/booking.action";
 import visa from "./../../assets/images/visa_mastercard.png";
@@ -6,19 +6,29 @@ import atm from "./../../assets/images/ATM.png";
 import Swal from "sweetalert2";
 import {useHistory} from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { getInforAccountAPI } from "../../redux/actions/inforAccount.action";
 
 
 export default function InforBookChair(props) {
   const {info} = props;
-  console.log(info)
+  // console.log(info)
   const history = useHistory();
   const chairBooking = useSelector((state) => state.chair.chairBooking);
+  console.log(chairBooking)
   const dispatch = useDispatch();
+  // Mã lịch chiếu
   const { id } = useParams();
+  const maLichChieu = id;
+  
+  // Lấy Id user
+  const user_id = useSelector(state => state.account.account.id);
+  useEffect(() => {
+    dispatch(getInforAccountAPI())
+  }, [dispatch])
 
   const rederInforBookingChair = () => {
     return chairBooking.map((item, index) => {
-      return <p style={{color:"green"}} key={index}>{item.hang.concat(item.tenGhe)}</p>;
+      return <p style={{color:"orangered"}} key={index}>{item.hang.concat(item.tenGhe)}</p>;
     });
   };
 // tính tổng tiền
@@ -28,6 +38,23 @@ export default function InforBookChair(props) {
               return (tongTien += gheDangDat.giaVe)
           },0).toLocaleString()
       )
+  }
+
+  //Tổng tiền okee
+  let totalAmount = tongTien();
+  console.log(totalAmount)
+  //Danh sach vé
+  const danhSachVe = chairBooking.map((ve) => (
+    {
+        giaVe : ve.giaVe,
+        maGhe : ve.maGhe
+    }
+  ))
+  console.log(danhSachVe)
+  //Sô lượng
+  if(danhSachVe && danhSachVe.length > 0){
+    var quantity = null,
+    quantity = danhSachVe.length;
   }
   //Kiểm tra trước khi đặt vé 
   let check;
@@ -105,10 +132,10 @@ export default function InforBookChair(props) {
                 cancelButtonText: "Hủy",
               }).then((result) => {
                 if (result.value) {
-                  history.push({ pathname: `/` });
-                  window.location.reload();
                   Swal.fire("Đã đặt vé thành công");
-                  dispatch(bookingTicketAPI(id,chairBooking));
+                  dispatch(bookingTicketAPI(maLichChieu,totalAmount,quantity,danhSachVe,user_id));
+                  history.push({ pathname: `/` });
+                  // window.location.reload();
                 }
               });
       }}>THANH TOÁN</button>

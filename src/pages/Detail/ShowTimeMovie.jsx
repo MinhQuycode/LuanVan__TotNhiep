@@ -171,7 +171,7 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
       <div className="row showsTime">
         <div className={`${col1} showTheater`}>{renderTheater()}</div>
         <div className={`${col2} showTime`}>
-          <div className="row day">
+          {/* <div className="row day">
             {arrDate?.map((date) => {
               return date?.map((item,index) => {
                 return <div key={index} className={`col-2 day_show ${isSelectedDate===index ? Active : nonClassActive}`}
@@ -181,7 +181,7 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
                 >{item}</div>;
               });
             })}
-          </div>
+          </div> */}
               <div className="hour">
                 <div className="hour__theater">
                   {cinemasId?.map((itemId) =>{

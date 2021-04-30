@@ -35,7 +35,7 @@ export default function TimeBooking() {
     return (
             <div className="col-6 time__booking text-right">
               <p>Thời gian giữ ghế</p>
-              <Countdown date={Date.now() + 90000} renderer={renderer} onComplete={handleCompleted}/>
+              <Countdown date={Date.now() + 150000} renderer={renderer} onComplete={handleCompleted}/>
             </div>
     )
 }

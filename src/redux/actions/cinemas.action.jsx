@@ -22,7 +22,6 @@ export const getCinemasListActionFailed = (error) =>{
 }
 
 //Call API cụm rạp
-
 export const getCinemasListAPI = (id) =>{
     return async(dispatch) => {
         dispatch(getCinemasListActionRequest());
