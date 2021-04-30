@@ -10,12 +10,13 @@ import { useParams } from "react-router-dom";
 import ScrollToTop from "../../Layouts/ScrollToTop/ScrollToTop";
 import TimeBooking from "./TimeBooking";
 import Notfound from "../PageNotFound/Notfound";
+import NameChair from "./NameChair";
 
 export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
   // console.log(inforBK)
   let chairList = useSelector((state) => state.chair.chairList);
-  // console.log(chairList)
+  // console.log(chairList.length)
   let error = useSelector((state) => state.chair.error);
   // console.log(error);
   const { id } = useParams();
@@ -31,13 +32,30 @@ export default function Booking(props) {
   const chunkArray = (myArray, chunk_size) => {
     var results = [];
     while (myArray.length) {
+      // console.log(myArray.length);
       results.push(myArray.splice(0, chunk_size));
     }
     return results;
   };
-  if (chairList && chairList.length > 0) {
-    let listChair = [...chairList];
-    var result = chunkArray(listChair,14);
+  // Kiểm tra chairList và đếm số ghế
+  if(chairList && chairList.length > 0){
+    var countChair = chairList.length
+  }
+  // console.log(countChair)
+  switch (countChair) {
+    case 120:
+    case 144:
+      let listChair = [...chairList];
+      var result = chunkArray(listChair,12);
+      break;   
+    case 140:
+    case 154:
+      let listChair1 = [...chairList];
+      var result = chunkArray(listChair1,14);
+      break;  
+    default:
+      console.log("Không tồn tại mảng ghế !")
+      break;
   }
   // console.log(result);
 
@@ -63,13 +81,17 @@ export default function Booking(props) {
                 <p>{inforBK?.diaChi}</p>
               </div>
             </div>
-            <TimeBooking/>
+            {/* <TimeBooking/> */}
           </div>
           <div className="row screen">
             <img src={screen} alt="anh"/>
           </div>
           <div className="row chair">
-            {renderChairList()}
+            <NameChair name={chairList}/>
+            <div className="chairlist">
+              {renderChairList()}
+            </div>
+            <NameChair name={chairList}/>
           </div>
           <div className="row note">
             <div className="noteseat">

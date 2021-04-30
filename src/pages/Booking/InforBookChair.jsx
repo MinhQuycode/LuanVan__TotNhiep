@@ -9,17 +9,16 @@ import { useParams } from "react-router-dom";
 
 
 export default function InforBookChair(props) {
+  const {info} = props;
+  console.log(info)
   const history = useHistory();
   const chairBooking = useSelector((state) => state.chair.chairBooking);
   const dispatch = useDispatch();
   const { id } = useParams();
-  // console.log(chairBooking);
-
 
   const rederInforBookingChair = () => {
     return chairBooking.map((item, index) => {
-      // console.log(item)
-      return <p key={index}>{item.hang.concat(item.tenGhe)}</p>;
+      return <p style={{color:"green"}} key={index}>{item.hang.concat(item.tenGhe)}</p>;
     });
   };
 // tính tổng tiền
@@ -33,29 +32,25 @@ export default function InforBookChair(props) {
   //Kiểm tra trước khi đặt vé 
   let check;
   chairBooking.length > 0 ? check = false : check = true;
-  // console.log(chairBooking.length)
-// console.log(check);
   return (
     <div className="infor__booking">
       <p className="price">{tongTien()} Đ</p>
       <div className="line"></div>
-      <p style={{ fontWeight: "600" }}>{props.info?.tenPhim}</p>
-      <div className="line"></div>
       <div className="title__booking">
         <p>Ngày giờ chiếu</p>
-        <p className="ml-5">
-          {props.info?.ngayChieu} - {props.info?.gioChieu}
+        <p className="ml-5" style={{color:"green"}}>
+          {info?.ngayChieu} - {info?.gioChieu}
         </p>
       </div>
       <div className="line"></div>
       <div className="title__booking">
         <p>Cụm rạp:</p>
-        <p className="ml-5">{props.info?.tenCumRap}</p>
+        <p className="ml-5" style={{color:"green"}}>{info?.tenCumRap}</p>
       </div>
       <div className="line"></div>
       <div className="title__booking">
         <p>Rạp:</p>
-        <p>{props.info?.tenRap}</p>
+        <p style={{color:"green"}}>{info?.tenRap}</p>
       </div>
       <div className="line"></div>
       <div className="title__booking">

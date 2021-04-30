@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{memo} from 'react'
 import star1 from '../../../assets/images/star1.png'
 import star2 from '../../../assets/images/star2.png'
 import {useHistory} from "react-router-dom";
 
-export default function MovieItems(props) {
+function MovieItems(props) {
     const history = useHistory();
     
     const handleClickMovie = (idMovie) =>{
@@ -42,3 +42,4 @@ export default function MovieItems(props) {
     </div>
     )
 }
+export default memo(MovieItems);

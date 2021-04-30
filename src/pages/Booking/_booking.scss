@@ -7,34 +7,51 @@
     height: auto;
     display: flex;
     justify-content: center;
-    .chairRoom {
-      width: 100%;
+    .name--chair {
       display: flex;
-      justify-content: center;
-      flex-direction: row;
-      border-radius: 5px;
-      color: black;
-      cursor: pointer;
-      margin: 5px;
-      text-align: center;
-      line-height: 30px;
-      .ghe {
+      flex-direction: column;
+      span{
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 40px;
+        padding-top: 7px;
+        padding-right: 20px;
+      }
+    }
+    .chairlist {
+      .chairRoom {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
         border-radius: 5px;
-        width: 30px;
-        height: 30px;
-      }
-      .gheThuong {
-        background-color: green;
-      }
-      .gheVip {
-        background-color: orangered;
-      }
-      .daDat {
-        background-color: black;
-        cursor: no-drop;
-      }
-      .dangChon {
-        background-color: grey;
+        color: black;
+        cursor: pointer;
+        margin: 5px;
+        text-align: center;
+        line-height: 30px;
+        .ghe {
+          border-radius: 5px;
+          width: 30px;
+          height: 30px;
+        }
+        .gheGiua {
+          margin-right: 40px;
+        }
+        .gheThuong {
+          background-color: green;
+        }
+        .gheVip {
+          background-color: orangered;
+        }
+        .daDat {
+          background-color: black;
+          cursor: no-drop;
+        }
+        .dangChon {
+          background-color: grey;
+        }
       }
     }
   }
@@ -64,6 +81,7 @@
     }
   }
   .screen {
+    height: 55px;
     img {
       width: 100%;
     }
@@ -126,22 +144,22 @@
       border-bottom: 1px dashed #ccc;
       min-height: 40px;
     }
-    .title__booking1{
-      p{
+    .title__booking1 {
+      p {
         font-weight: bold;
       }
-      .radio__item{
+      .radio__item {
         display: flex;
         align-items: center;
         padding-left: 10px;
-        .radio__item--input{
+        .radio__item--input {
           width: 20px;
           height: 20px;
         }
-          .pay__figure{
-            width: 30px;
-            margin: 0 10px;
-          }
+        .pay__figure {
+          width: 30px;
+          margin: 0 10px;
+        }
       }
     }
     .btn__booking {
@@ -160,10 +178,10 @@
     }
   }
 
-//RESPONSIVE
-@media only screen and (max-width: 991px) {
-  .infor__booking{
-    margin-top: 2rem;
+  //RESPONSIVE
+  @media only screen and (max-width: 991px) {
+    .infor__booking {
+      margin-top: 2rem;
+    }
   }
-}
 }
