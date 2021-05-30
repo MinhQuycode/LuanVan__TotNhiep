@@ -26,7 +26,7 @@ export const signUpAPI = (user,history) =>{
         try {
             const res = await axios ({
                 method :"POST",
-                url:"http://localhost:8000/api/register",
+                url:"https://cinemasummary.herokuapp.com/api/register",
                 data : user,
             });
             dispatch(signUpActionSuccess(res));

@@ -30,7 +30,7 @@ export const signInAPI = (user,history) =>{
         try {
             const res = await axios ({
                 method :"POST",
-                url:"http://localhost:8000/api/login",
+                url:"https://cinemasummary.herokuapp.com/api/login",
                 data : user,
             });
             //Gửi data lên store

@@ -26,7 +26,7 @@ export const getInforAccountAPI = () =>{
             const user = JSON.parse(localStorage.getItem("userLogin"));
             const res = await axios({
                 method:'GET',
-                url:`http://localhost:8000/api/user`,
+                url:`https://cinemasummary.herokuapp.com/api/user`,
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
                   },

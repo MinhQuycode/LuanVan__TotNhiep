@@ -28,7 +28,7 @@ export const getCinemasListAPI = (id) =>{
         try {
             const res = await axios({
                     method : "GET",
-                    url : `http://localhost:8000/api/theaterbranch`,
+                    url : `https://cinemasummary.herokuapp.com/api/theaterbranch`,
                 })
                 dispatch(getCinemasListActionSuccess(res.data))
         }

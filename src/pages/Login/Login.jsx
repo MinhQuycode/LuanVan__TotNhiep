@@ -182,8 +182,9 @@ function SignIn(props) {
               </Link>
             </Grid>
             <Grid item>
-              <NavLink to="/register" variant="body2">
-                {"Chưa có tài khoản ? Đăng ký ngay"}
+             Chưa có tài khoản ? 
+              <NavLink to="/register" variant="body2" style={{color:'orangered', textDecoration:"underline"}}>
+                 Đăng ký ngay
               </NavLink>
             </Grid>
           </Grid>

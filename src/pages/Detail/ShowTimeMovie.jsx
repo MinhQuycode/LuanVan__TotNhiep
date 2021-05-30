@@ -104,27 +104,11 @@ function ShowTimeMovie(props) {
       let itemDate = dateShows?.map((item) => item.substring(5,10));
       // console.log(itemDate)
       arrDate.push(itemDate);
-      
-      const arrDate2 = arrDate.sort((a,b)=>{
-                // return new Date(b.substring(4,6)) - new Date(a.substring(4,6));\
-                return(
-                console.log(a,b)
-                )
-              })
-              console.log(arrDate2);
-
-
-              var today = new Date();
-              var dd = String(today.getDate()).padStart(2, '0');
-              var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-              var yyyy = today.getFullYear();
-              
-              today = mm + '/' + dd + '/' + yyyy;
-              // document.write(today);
 
       useEffect(() => {
+        if(itemDate){
         dispatch(postDateReducer(itemDate[0]))
-      },[])
+      }},[])
       const showTimeWithDate = () =>{
         return(
           itemDate?.map((date)=>{

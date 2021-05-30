@@ -25,7 +25,7 @@ export const getMovieListAPI = () =>{
         try {
             const res = await axios({
                 method :"GET",
-                url :"http://localhost:8000/api/movies"
+                url :"http://cinemasummary.herokuapp.com/api/movies"
             });
             //Chuyển dữ liệu lên store
             dispatch(getMovieListActionSuccess(res.data));

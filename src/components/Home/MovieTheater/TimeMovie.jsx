@@ -93,17 +93,10 @@ function TimeMovie() {
                     </div>
                   </div>
                   <div className="col-8 info_lich">
-                    <p className="text-center mr-4">
-                      <button
-                        className="btn__showtimes"
-                        data-toggle="collapse"
-                        data-target={`#${img.name.replace(/\s/g, '')}`}
-                        aria-expanded="false"
-                        aria-controls="collapseExample"
-                      >
-                        Hiển thị lịch chiếu
-                      </button>
-                    </p>
+                  <p className="text-center mr-4" style={{fontWeight:"bold",fontSize:12}}>
+                      LỊCH CHIẾU
+                  </p>
+                  <div className="lich__chieu__phim">
                     {arrayTimeMovie?.map((item) => {
                       return item
                         .filter((date) => date.movies_id === img.id)
@@ -111,8 +104,7 @@ function TimeMovie() {
                           return (
                                 <button
                                   key={index}
-                                  className="btn__time m-2 collapse"
-                                  id={img.name.replace(/\s/g, '')}
+                                  className="btn__time m-2"
                                   onClick={() => {
                                     handleChoiceShowsTime(times.id);
                                   }}
@@ -131,6 +123,7 @@ function TimeMovie() {
                           );
                         });
                     })}
+                  </div>
                   </div>
                 </div>
               );

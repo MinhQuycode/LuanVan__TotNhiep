@@ -17,7 +17,6 @@ const initialState = {
 
 const showTimesReducer = (state = initialState, action) => {
     let {type,payload} = action;
-    // state.dateGroupChoosed.date = state.showTimes?.map((item)=>{item[0].date.substring(5,10)});
     switch (type) {
     case GET_SHOWTIMES_REQUEST:
         state.loading = true;

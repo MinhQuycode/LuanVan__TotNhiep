@@ -59,7 +59,7 @@ export const getShowTimeAPI = (id) =>{
         try {
             const res = await axios ({
                 method : 'GET',
-                url : `http://localhost:8000/api/showtimes`,
+                url : `https://cinemasummary.herokuapp.com/api/showtimes`,
             })
             dispatch(getShowTimesActionSuccess(res.data));
         } catch (error) {

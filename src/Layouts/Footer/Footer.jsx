@@ -33,7 +33,7 @@
               <span className="border__none">Luận văn tốt nghiệp</span>
             </li>
             <li>
-              <span>My Personal Information </span>
+              <span>Dương Xuân Tiến Sỹ</span>
             </li>
             <li>
               <span>Phạm Minh Quý</span>

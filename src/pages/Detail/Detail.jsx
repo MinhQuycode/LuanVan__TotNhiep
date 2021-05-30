@@ -10,22 +10,15 @@ import Loading from '../../Layouts/Loading/Loading';
 import Notfound from '../PageNotFound/Notfound';
 
 export default function Detail(props) {
-    let error = useSelector((state) => state.inforMovie.error);
     const {idMovie} = useParams();
-    // console.log(idMovie)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovieListAPI());        
-    },[dispatch]);
-
+    },[]);
     const inforMovie = useSelector(state => state.movie.movieList);
-    // console.log(inforMovie);
     const loading = useSelector(state => state.movie.loading);
-
     let movie = inforMovie?.find(movieItem => movieItem.id == idMovie);
-    // console.log(movie);
-
-    if(error) return (<Notfound/>) 
+    if(!movie) return (<Notfound/>) 
     if(loading === true) return (<Loading/>) 
     return (
         <div id="detail">

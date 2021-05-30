@@ -28,19 +28,6 @@ export default function InforMovie(props) {
 let col = "col-6";
 windowDimensions.width <= 815 ?  col = "col-12" : col = "col-6";
 
-const renderStar = (n) =>{
-  var ListProduct = [];
-  for (var i = 0; i < n; i++) {
-    ListProduct = ListProduct.concat(<i key={i} style={{ color: "red",height:'17px' }} className="fas fa-star"></i>);
-  };
-  return ListProduct;
-}
-
-const getRandomInt = () => {
-  return Math.floor(Math.random() * 5) + 1;
-}
-const n = getRandomInt();
-
     return (
       <div className="row detail__trailer">
         <div className={`${col} trailer`}>
@@ -93,10 +80,6 @@ const n = getRandomInt();
           </p>
           <p>
             <span>Ngôn ngữ :</span> {props.infor?.language}
-          </p>
-          <p>
-            <span>Đánh giá :</span> 
-            {renderStar(n)}
           </p>
         </div>
       </div>

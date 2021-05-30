@@ -8,7 +8,6 @@ import theaterReducer from "./reducers/theater.reducer";
 import cinemasReducer from "./reducers/cinemas.reducer";
 import showTimesReducer from "./reducers/showtimes.reducer";
 import chairListReducer from "./reducers/booking.reducer";
-import inforMovieReducer from "./reducers/inforMovie.reducer";
 import movieSearch from "./reducers/searchMovie.reducer";
 import inforAcountReducer from "./reducers/inforAccount.reducer";
 import detailTicketReducer from "./reducers/detailTicketUser.reducer";
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   cinemas : cinemasReducer,
   showTimes : showTimesReducer,
   chair : chairListReducer,
-  inforMovie : inforMovieReducer,
   movieSearch : movieSearch,
   account : inforAcountReducer,
   ticket : detailTicketReducer
