@@ -18,8 +18,8 @@ export default function Detail(props) {
     const inforMovie = useSelector(state => state.movie.movieList);
     const loading = useSelector(state => state.movie.loading);
     let movie = inforMovie?.find(movieItem => movieItem.id == idMovie);
+    if(loading) return (<Loading/>) 
     if(!movie) return (<Notfound/>) 
-    if(loading === true) return (<Loading/>) 
     return (
         <div id="detail">
             <ScrollToTop/>
