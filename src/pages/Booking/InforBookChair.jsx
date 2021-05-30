@@ -1,20 +1,18 @@
 import React,{useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {bookingTicketAPI} from "./../../redux/actions/booking.action";
+import {bookingTicketAPI,resetReducerChair} from "./../../redux/actions/booking.action";
 import visa from "./../../assets/images/visa_mastercard.png";
 import atm from "./../../assets/images/ATM.png";
 import Swal from "sweetalert2";
-import {useHistory} from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getInforAccountAPI } from "../../redux/actions/inforAccount.action";
 
 
 export default function InforBookChair(props) {
   const {info} = props;
-  // console.log(info)
   const history = useHistory();
   const chairBooking = useSelector((state) => state.chair.chairBooking);
-  console.log(chairBooking)
+  // console.log(chairBooking)
   const dispatch = useDispatch();
   // Mã lịch chiếu
   const { id } = useParams();
@@ -24,7 +22,7 @@ export default function InforBookChair(props) {
   const user_id = useSelector(state => state.account.account.id);
   useEffect(() => {
     dispatch(getInforAccountAPI())
-  }, [dispatch])
+  }, [])
 
   const rederInforBookingChair = () => {
     return chairBooking.map((item, index) => {
@@ -39,10 +37,8 @@ export default function InforBookChair(props) {
           },0).toLocaleString()
       )
   }
-
   //Tổng tiền okee
   let totalAmount = tongTien();
-  console.log(totalAmount)
   //Danh sach vé
   const danhSachVe = chairBooking.map((ve) => (
     {
@@ -50,13 +46,82 @@ export default function InforBookChair(props) {
         maGhe : ve.maGhe
     }
   ))
-  console.log(danhSachVe)
+  // console.log(danhSachVe)
   //Sô lượng
   if(danhSachVe && danhSachVe.length > 0){
     var quantity = null,
     quantity = danhSachVe.length;
   }
-  //Kiểm tra trước khi đặt vé 
+  // Lấy message từ API booking
+  const message = useSelector(state => state.chair.response);
+  var resMessage = message?.status;
+  console.log(message);
+  //Submit 
+  const submitAPI = () =>{
+    Swal.fire({
+      title: "Bạn muốn đặt vé ?",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Đồng ý",
+      cancelButtonText: "Hủy",
+    }).then((result)=>{
+      if(result.value){
+         dispatch(bookingTicketAPI(maLichChieu,totalAmount,quantity,danhSachVe,user_id));
+      }
+    })
+}
+useEffect(() => {
+  if(resMessage === "fails"){
+    Swal.fire({
+      title: `${message?.msg}`,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Đặt tiếp",
+      cancelButtonText: "Hủy",
+    }).then((result)=>{
+      if(result.value){
+         window.location.reload();
+      }else{
+          history.push({ pathname: `/home` });
+      }
+    })
+  }else if(resMessage === "success"){
+    Swal.fire({
+      title: `Đặt vé thành công`,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonText: "Home",
+      cancelButtonText: "Xem danh sách vé đã đặt",
+    }).then((result)=>{
+      if(result.value){
+        history.push({ pathname: `/home` });
+        dispatch(resetReducerChair())
+      }else{
+        history.push({pathname:`/account`})
+        dispatch(resetReducerChair())
+      }
+    })
+  }
+}, [resMessage,message])
+//Kiểm tra trước khi đặt vé 
   let check;
   chairBooking.length > 0 ? check = false : check = true;
   return (
@@ -124,22 +189,8 @@ export default function InforBookChair(props) {
         </div>
       </div>
       <button disabled={check} className="btn__booking mt-4" onClick={()=>{
-            Swal.fire({
-                title: "Bạn muốn đặt vé ?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: "Đồng ý",
-                cancelButtonText: "Hủy",
-              }).then((result) => {
-                if (result.value) {
-                  Swal.fire("Đã đặt vé thành công");
-                  dispatch(bookingTicketAPI(maLichChieu,totalAmount,quantity,danhSachVe,user_id));
-                  history.push({ pathname: `/` });
-                  // window.location.reload();
-                }
-              });
+           {submitAPI()}
       }}>THANH TOÁN</button>
     </div>
   ) 
 }
- 

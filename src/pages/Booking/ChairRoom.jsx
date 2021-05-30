@@ -9,12 +9,13 @@ export default function ChairRoom(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     const chairBooking = useSelector(state => state.chair.chairBooking);
+    // console.log(chairBooking)
 
     const  renderRowChair = () => {
         let theMiddle = Math.floor(chair.length / 2);
         return (
             chair?.map((item,index) =>{
-                console.log(item)
+                // console.log(item)
                 let disabled = false;
                 let loaiGhe = "";
                 if(item.seat_type.type === "standard"){
@@ -23,13 +24,13 @@ export default function ChairRoom(props) {
                 if(item.seat_type.type === "vip"){
                     loaiGhe = 'gheVip';
                 }
-                if(item.daDat){
+                if(item.status === true){
                     loaiGhe = 'daDat';
                     disabled = true;
                 }
-                //Xét trạng thái ghê đang đặt
+                //Xét trạng thái ghê đang đặt // 
                 let cssGheDangDat = "";
-                let indexGheDangDat = chairBooking.findIndex(gheDangDat => gheDangDat?.maGhe === item?.maGhe);
+                let indexGheDangDat = chairBooking.findIndex(gheDangDat => gheDangDat?.maGhe === item?.id);
                 if(indexGheDangDat !== -1){
                     cssGheDangDat = "dangChon";
                 }

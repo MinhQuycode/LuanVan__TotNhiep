@@ -1,4 +1,4 @@
-import { GET_INFOR_ACCOUNT_FAILED,GET_INFOR_ACCOUNT_SUCCESS,GET_INFOR_ACCOUNT_REQUEST } from "../constants/inforAccount.constant";
+import {GET_INFOR_ACCOUNT_FAILED,GET_INFOR_ACCOUNT_SUCCESS,GET_INFOR_ACCOUNT_REQUEST } from "../constants/inforAccount.constant";
 const initialState = {
     loading : null,
     account : [],
@@ -26,7 +26,6 @@ const inforAcountReducer =  (state = initialState, action ) => {
         state.account = [];
         state.error = payload;
         return { ...state}
-
     default:
         return state
     }

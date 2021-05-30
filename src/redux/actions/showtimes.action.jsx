@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_SHOWTIMES_FAILED,POST_DATE_CHOOSED,GET_SHOWTIMES_REQUEST,GET_SHOWTIMES_SUCCESS,POST_ID_THEATER_CHOOSE,POST_THEATERGROUP_CHOOSED} from "../constants/showtimes.constant";
+import {POST_DATE_REDUCER,GET_SHOWTIMES_FAILED,POST_DATE_CHOOSED,GET_SHOWTIMES_REQUEST,GET_SHOWTIMES_SUCCESS,POST_ID_THEATER_CHOOSE,POST_THEATERGROUP_CHOOSED} from "../constants/showtimes.constant";
 
 export const getShowTimesActionSuccess = (data) => {
     return {
@@ -45,8 +45,14 @@ export const postDateGroup = (date,index) =>{
         }
     }
 }
+export const postDateReducer = (date) =>{
+    return {
+        type : POST_DATE_REDUCER,
+        payload : date,
+        
+    }
+}
 // Call API lấy thời gian chiếu
-
 export const getShowTimeAPI = (id) =>{
     return async(dispatch) => {
         dispatch(getShowTimesActionRequest())

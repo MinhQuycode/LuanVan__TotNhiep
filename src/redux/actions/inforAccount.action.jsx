@@ -1,4 +1,4 @@
-import {GET_INFOR_ACCOUNT_FAILED,GET_INFOR_ACCOUNT_SUCCESS,GET_INFOR_ACCOUNT_REQUEST} from "./../constants/inforAccount.constant";
+import {GET_INFOR_ACCOUNT_FAILED,GET_INFOR_ACCOUNT_SUCCESS,GET_INFOR_ACCOUNT_REQUEST,GET_INFOR_DETAIL_TICKET_REQUEST,GET_INFOR_DETAIL_TICKET_SUCCESS,GET_INFOR_DETAIL_TICKET_FAILED} from "./../constants/inforAccount.constant";
 import axios from "axios";
 
 export const getInforAccountRequest = () =>{
@@ -31,10 +31,41 @@ export const getInforAccountAPI = () =>{
                     Authorization: `Bearer ${user.access_token}`,
                   },
             })
-            
             dispatch(getInforAccountSuccess(res.data))
         } catch (error) {
             dispatch(getInforAccountFailed(error))
+        }
+    }
+}
+
+export const getInforDetailTicketRequest = () =>{
+    return {
+        type:GET_INFOR_DETAIL_TICKET_REQUEST,
+    }
+}
+export const  getInforDetailTicketSuccess = (account) =>{
+    return {
+        type:GET_INFOR_DETAIL_TICKET_SUCCESS,
+        payload :account,
+    }
+}
+export const  getInforDetailTicketFailed = (error) =>{
+    return {
+        type:GET_INFOR_DETAIL_TICKET_FAILED,
+        payload : error,
+    }
+}
+export const getInforDetailTicketAPI = (idUser) =>{
+    return async(dispatch) =>{
+        dispatch(getInforDetailTicketRequest())
+        try {
+            const res  = await axios({
+                method:"GET",
+                url:`http://localhost:8000/api/list-ticket/${idUser}`
+            })
+            dispatch(getInforDetailTicketSuccess(res.data))
+        } catch (error) {
+            dispatch(getInforDetailTicketFailed(error))
         }
     }
 }

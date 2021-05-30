@@ -21,7 +21,6 @@ function Header(props) {
 
   const handleChange = (event) =>{
     setstate({nameMovie : event.target.value});
-    console.log(state.nameMovie)
   }
   let placeholder = "Tìm tên phim muốn xem..."
   const handleSubmit = (event) =>{
@@ -94,7 +93,7 @@ function Header(props) {
                     textOverflow: "ellipsis",
                     color:'black'
                   }}  to="">
-                    Hi,{props.credential.name}
+                    Hi, {props.credential.name}
                   </NavLink>
                   <NavLink className="account" to="/account">Tài khoản</NavLink>
                 </li>

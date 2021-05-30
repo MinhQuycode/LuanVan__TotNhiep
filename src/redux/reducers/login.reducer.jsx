@@ -30,7 +30,7 @@ const loginReducer = (state = initialState,action) => {
     case LOG_OUT:
         localStorage.removeItem("userLogin");
         localStorage.clear();
-        return { ...initialState};    
+        return { ...initialState,loading:false};    
 
     default:
         return state

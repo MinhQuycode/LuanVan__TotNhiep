@@ -52,6 +52,12 @@ export const actLogout = (event,history) => {
       event.persist();
       Swal.fire({
         title: "Bạn có chắc muốn đăng xuất?",
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Đăng xuất!",

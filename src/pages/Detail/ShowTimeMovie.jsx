@@ -1,6 +1,6 @@
 import React ,{useState,useEffect,memo} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import { postTheaterGroup } from '../../redux/actions/showtimes.action';
+import { postDateReducer, postTheaterGroup } from '../../redux/actions/showtimes.action';
 import { postDateGroup } from '../../redux/actions/showtimes.action';
 import { useHistory } from 'react-router-dom';
 import {useParams} from "react-router-dom";
@@ -33,7 +33,6 @@ function ShowTimeMovie(props) {
         return () => window.removeEventListener('resize', handleResize);
       }
     }, [hasWindow]);
-    // console.log(windowDimensions);
     
     // Điều kiện chọn lịch chiếu
     const userSignIn = useSelector((state) => state.user.userSignin);
@@ -48,31 +47,28 @@ function ShowTimeMovie(props) {
     // Render theo rạp khi click
     const theaterChoose = useSelector(state => state.showTimes.theaterGroupChoosed);
     // console.log(theaterChoose);
-
     // Lấy lịch chiếu của phim  
     useEffect(() => {
       dispatch(getShowTimeAPI());
-    }, [dispatch]);
+    }, []);
 
     //Lấy thông tin rạp chiếu
     useEffect(() => {
       dispatch(getCinemasListAPI());
-    }, [dispatch]);
+    }, []);
     const theaterbranch = useSelector(state => state.cinemas.cinemasList);
     // console.log(theaterbranch);
 
     // Lấy thông tin rạp theo phim
     useEffect(() => {
       dispatch(getTheaterListAPI())
-    }, [dispatch]);
+    }, []);
     const theater = useSelector(state => state.theater.listTheater);
-
     const showTimes = useSelector(state => state.showTimes.showTimes);
-    // console.log(showTimes);
     
     //Lọc danh sách lịch chiếu theo phim
     const showTimesMovie = showTimes?.filter(time => time.movies_id == idMovie);
-    console.log(showTimesMovie);
+    // console.log(showTimesMovie);
 
     //RENDER THEATER
     // Lấy id theater
@@ -91,11 +87,12 @@ function ShowTimeMovie(props) {
           // console.log(element);
           let id = theater.filter(item => item.id === element);
           // console.log(time)
-          let arr = arrTheater.push(id);
+         arrTheater.push(id);
         }
         return arrTheater;
       }
       let arrayTimeMovie = TheaterMovie();
+      // console.log(arrayTimeMovie);
 
       //RENDER SHOWTIME
       // Lấy date trong mảng
@@ -105,31 +102,80 @@ function ShowTimeMovie(props) {
       // console.log(dateShows);
       let arrDate = [];
       let itemDate = dateShows?.map((item) => item.substring(5,10));
-      let arr = arrDate.push(itemDate);
-      // console.log(arrDate);
+      // console.log(itemDate)
+      arrDate.push(itemDate);
+      
+      const arrDate2 = arrDate.sort((a,b)=>{
+                // return new Date(b.substring(4,6)) - new Date(a.substring(4,6));\
+                return(
+                console.log(a,b)
+                )
+              })
+              console.log(arrDate2);
+
+
+              var today = new Date();
+              var dd = String(today.getDate()).padStart(2, '0');
+              var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+              var yyyy = today.getFullYear();
+              
+              today = mm + '/' + dd + '/' + yyyy;
+              // document.write(today);
+
+      useEffect(() => {
+        dispatch(postDateReducer(itemDate[0]))
+      },[])
+      const showTimeWithDate = () =>{
+        return(
+          itemDate?.map((date)=>{
+            return(
+              showTimesMovie?.filter((item)=> item.date.substring(5,10)===date)
+            )
+          })
+        )
+      }
+      //Lấy thời gian chiếu theo ngày
+      const day = showTimeWithDate();
+      // console.log(day);
+
+
       const chooseDateGroup = (date,index)=>{
         setIsSelectedDate(index);
         dispatch(postDateGroup(date,index));
-        console.log(date,index);
     }
-
+      const dateSelect = useSelector(state => state.showTimes.dateGroupChoosed);
+      // console.log(dateSelect);
       //REDER CINEMAS
-      let cinemas = showTimesMovie?.map(item=>item.theater_branch_id);
-      let cinemasId = cinemas?.filter((item,i,arr)=>arr.indexOf(item)===i);
-      console.log(cinemasId);
-      const TimeCinemas = () =>{
-        let arrayTime = [];
-        for (let index = 0; index < cinemasId?.length; index++) {
-          const element = cinemasId[index];
-          let arrTime = showTimesMovie.filter(item=> item.theater_branch_id === element);
-          arrayTime.push(arrTime);
-        }
-        return arrayTime;
+      const cinemas12 = () =>{
+        return(
+          day?.map((item) => {
+              return(
+                item.map((dayItem)=>dayItem.theater_branch_id)
+              )
+          }
+        ))
       }
-      const arrtime = TimeCinemas();
-      console.log(arrtime);
+      const cinemas1 = cinemas12();
+      // Lọc id branch khác nhau
+      const cinemasid1 = () =>{
+        return(
+        cinemas1?.map((item)=>{
+          return (
+            item?.filter((item,i,arr)=> arr.indexOf(item)===i)
+          )
+        })
+        )
+      }
+    let cinemasid = cinemasid1();
 
+      let cinemas = showTimesMovie?.map(item=>item.theater_branch_id);
 
+      const TimeCinema = () =>{
+        return(
+        day ? day[dateSelect.index] : ''
+        )
+      }
+      const time = TimeCinema();
 
 
     // Change theater
@@ -137,6 +183,7 @@ function ShowTimeMovie(props) {
         setIsSelected(index);
         dispatch(postTheaterGroup(id,logo,index));
     }
+
     let nonClassActive = 'non_active_theater';
     let Active = 'active_theater';
     const renderTheater = () =>{
@@ -171,7 +218,7 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
       <div className="row showsTime">
         <div className={`${col1} showTheater`}>{renderTheater()}</div>
         <div className={`${col2} showTime`}>
-          {/* <div className="row day">
+          <div className="row day">
             {arrDate?.map((date) => {
               return date?.map((item,index) => {
                 return <div key={index} className={`col-2 day_show ${isSelectedDate===index ? Active : nonClassActive}`}
@@ -181,14 +228,13 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
                 >{item}</div>;
               });
             })}
-          </div> */}
+          </div>
               <div className="hour">
                 <div className="hour__theater">
-                  {cinemasId?.map((itemId) =>{
+                  {cinemas ? cinemasid[dateSelect.index]?.map((itemId) =>{
                     return (
                       theaterbranch?.filter((branch) => branch.id === itemId)
                       .map((item, index) => {
-                        console.log(item)
                       return (
                         <div className="branch" key={index}>
                           <div className="branch--theater">
@@ -205,10 +251,7 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
                           <p>Giờ chiếu :</p>
                           <div className="gio">
                           {
-                            arrtime?.map((itemtime) =>{
-                              console.log(itemtime)
-                              return(
-                                itemtime.filter(itemt => itemt.theater_branch_id === item.id)
+                                time?.filter(itemt => itemt.theater_branch_id === item.id)
                                 .map((time,index)=>{
                                   return(
                                     <button key={index}
@@ -221,16 +264,14 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
                                   </button>
                                   )
                                 })
-                              )
-                            })
                           }
                           </div>
                         </div>
                       );
                     })
                     )
-                  })
-                  }
+                  }):''
+                }
                 </div>
               </div>
         </div>

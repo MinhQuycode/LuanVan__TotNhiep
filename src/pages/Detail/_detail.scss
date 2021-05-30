@@ -1,4 +1,18 @@
 #detail{
+    ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: orangered; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b30000; 
+      }
     margin-top: 3rem;
     padding:3rem 0;
     background-image: url('./../../assets/images/background.jpg');
@@ -71,10 +85,20 @@
         }
         
         .detail__text{
-            h3{
-                color: orangered;
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            .info__tiltle{
+                text-transform: uppercase;
+                color: red;
+                font-weight: bold;    
+                margin:1rem 0 ;            
             }
-            color: white;
+            h5{
+                color: orangered;
+                font-weight: bold;
+            }
+            color: black;
             font-size: 15px;
             span{
                 color: orangered;
@@ -102,8 +126,8 @@
                 .theater_item{
                     height: 60px;
                     cursor: pointer;
-                    padding-bottom: 1rem;
-                    border-bottom: 1px solid black;
+                    padding: 2rem 5px;
+                    box-shadow: 0px 3px 4px 0 #fb4226;
                     display: flex;
                     align-items: center;
                     margin: 1rem 0;
@@ -122,12 +146,12 @@
                 }
             }
             .showTime{
-                border-left: 1px solid black;
+                border-left: 1px solid #fb4226;
                 .day{
                     display: flex;
                     height: 75px;
                     line-height: 75px;
-                    border-bottom: 1px solid black;
+                    box-shadow: 0px 3px 4px 0 #fb4226;
                     flex-direction: row;
                     width: 100%;
                     flex-wrap: nowrap;
@@ -188,6 +212,8 @@
     }
     .active_theater{
         opacity: 1;
+        color: orangered !important;
+        font-weight: bold;
     }
     .non_active_theater{
         opacity: 0.45;
@@ -219,6 +245,7 @@
         .detail__text{
             margin-top: 2rem;
             text-align: center;
+            background-color: orangered;
         }
     }
     //Showtime
@@ -230,7 +257,7 @@
                 display: flex;
                 justify-content: space-around;
                 flex-direction: row;
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid #fb4226;
                 border-right: unset;
                 width: 100% !important;
                 .theater_item{
@@ -242,7 +269,7 @@
             }
             .showTime{
                 .hour{
-                    border-bottom: 1px solid black;
+                    border-bottom: 1px solid #fb4226;
                 }
             }
         }

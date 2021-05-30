@@ -1,10 +1,11 @@
-import {GET_CHAIR_FAILED,GET_CHAIR_SUCCESS,GET_CHAIR_REQUEST,BOOK_TICKET} from "../constants/booking.constant";
+import {GET_CHAIR_FAILED,GET_CHAIR_SUCCESS,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_REQUEST,BOOK_TICKET} from "../constants/booking.constant";
 const initialState = {
     loading :false,
     chairList : [],
     inforBooking : [],
     chairBooking : [],
     error : null,
+    response : [],
 }
 
 const chairListReducer = (state = initialState, action) => {
@@ -43,7 +44,16 @@ const chairListReducer = (state = initialState, action) => {
         }
         state.chairBooking = chairBookingNew;
         return { ...state} 
-
+    
+    case MSG_BOOKING : 
+        state.response = payload;
+        return {...state}
+    case RESET_BOOKING_CHAIR : 
+         let responseNew = [];
+        state.response = responseNew;
+        let chairBookingNull = [];
+        state.chairBooking = chairBookingNull;
+        return {...state}
     default:
         return state
     }

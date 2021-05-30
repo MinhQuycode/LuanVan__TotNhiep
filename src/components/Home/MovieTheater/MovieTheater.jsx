@@ -11,12 +11,10 @@ function MovieTheater(props) {
     const dispatch = useDispatch();
     const listTheater = useSelector(state => state.theater.listTheater);
     const listCinemas = useSelector(state => state.cinemas.cinemasList);
-    // console.log(listTheater);
-    // console.log(listCinemas);
     useEffect(() => {
         dispatch(getTheaterListAPI());
         if (listCinemas?.length > 0) dispatch(postShowTimesChoose(listCinemas[0].id));
-    }, [dispatch, listCinemas]);
+    }, [listCinemas]);
 
     let nonClassActive = 'non_active_theater';
     let Active = 'active_theater'
@@ -29,7 +27,6 @@ function MovieTheater(props) {
     const renderTheater = () => {
         return (
             listTheater?.map((theater,index) =>{
-                // console.log(theater)
                 return (
                     <div key={index} className={`col-2 cumrap__item ${isSelected===index ? Active : nonClassActive}`}  
                     onClick={() => (isSelected === index ? '' : chooseTheaterGroup(theater.id,theater.logo, index))}>
@@ -41,7 +38,7 @@ function MovieTheater(props) {
     }
     return (
         <section id="cumrap">
-            <h3 className="title__cumrap">Cụm rạp</h3>
+            <h3 className="title__cumrap" style={{color:'orangered',fontWeight:"bold"}}>Cụm rạp</h3>
             <div className="row cumrap__main">
                 {renderTheater()}
             </div>

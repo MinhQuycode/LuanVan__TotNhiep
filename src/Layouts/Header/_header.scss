@@ -8,8 +8,9 @@ header {
         background-color: orangered;
         height: 48px;
         img {
-            width: 40px;
+            width: 42px;
             height: 38px;
+            background-color: white;
         }
         .search__header1{
             border: none;
@@ -69,6 +70,7 @@ header {
                     
                 }
                 .user__account{
+                    min-width: 103px;
                     .account{
                         cursor: pointer;
                         position: absolute;
@@ -78,7 +80,7 @@ header {
                         right: -1px;
                         font-size: 14px;
                         font-weight: bold;
-                        width: 107px;
+                        width: 104px;
                         height: 0px;
                         text-align: center;
                         line-height: 35px;

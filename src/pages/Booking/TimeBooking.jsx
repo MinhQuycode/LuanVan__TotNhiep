@@ -19,6 +19,12 @@ export default function TimeBooking() {
     const handleCompleted = () => {
         Swal.fire({
           title: "Hết giờ",
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
           text: "Bạn có muốn đặt vé lại!",
           icon: "warning",
           showCancelButton: true,

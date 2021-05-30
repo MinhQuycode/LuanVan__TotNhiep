@@ -2,7 +2,7 @@ import { SIGN_UP_REQUEST,SIGN_UP_FAILED,SIGN_UP_SUCCESS } from "../constants/reg
 
 const initialState = {
     loading :false,
-    userRegister : {},
+    userRegister : null,
     error :null
 }
 

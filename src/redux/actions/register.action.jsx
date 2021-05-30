@@ -29,8 +29,8 @@ export const signUpAPI = (user,history) =>{
                 url:"http://localhost:8000/api/register",
                 data : user,
             });
-            dispatch(signUpActionSuccess(user));
-            history.push("/login");
+            dispatch(signUpActionSuccess(res));
+            // history.push("/login");
             //Chuyển về trang đăng nhập khi đăng ký thành công
         } catch(error){
             dispatch(signUpActionFailed(error));

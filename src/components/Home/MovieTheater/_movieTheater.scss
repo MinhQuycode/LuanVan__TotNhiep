@@ -1,4 +1,18 @@
 #cumrap{
+    ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: orangered; 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b30000; 
+      }
     color: black;
     padding-top: 3rem;
     width: 80%;
@@ -16,6 +30,9 @@
         width: 100%;
         margin-bottom: 2rem;
         .cumrap__item{
+            padding: 10px;
+            box-shadow: 0 -3px 10px 0 #fb4226;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             cursor: pointer;
@@ -36,6 +53,8 @@
                 color: black;
             }
             .chon__tenRap{
+                border: 1px solid #ebebec;
+                border-radius: 10px;
                 height: 500px;
                 overflow: auto;
                 padding: 1rem;
@@ -43,8 +62,9 @@
                     display: flex;
                     align-items: center;
                     margin-bottom: 1rem;
-                    border-bottom: 1px solid black;
+                    box-shadow: 0 -3px 10px 0 #fb4226;
                     padding-bottom: 1rem;
+                    padding: 10px;
                     width: 100%;
                     img{
                         width: 60px;
@@ -69,12 +89,14 @@
                 color: black;
             }
             .lich{
-                // background-color: lightblue;
+                border: 1px solid #ebebec;
+                border-radius: 10px;
                 height: 500px;
                 overflow: auto;
                 padding: 1rem;
                 .chieu{
-                    border-bottom: 1px solid black;
+                    box-shadow: 0 -3px 10px 0 #fb4226;
+                    padding: 10px;
                     padding-bottom: 1rem;
                     margin-bottom: 1rem;
                     img{
@@ -94,6 +116,22 @@
                             transition: all 0.5s;
                             font-weight: bold;
                             &:hover{
+                                background-color: rgba(255, 68, 0, 0.801);
+                                color: white;
+                                
+                            }
+                        }
+                        .btn__showtimes{
+                            border: 2px solid #e4e4e4;
+                            border-radius: 25px;
+                            height: 50px;
+                            line-height: 47px;
+                            padding: 0 20px;
+                            font-size: 14px;
+                            background-color:orangered;
+                            color: black;
+                            font-weight: bold;
+                            &:active{
                                 background-color: rgba(255, 68, 0, 0.801);
                                 color: white;
                                 

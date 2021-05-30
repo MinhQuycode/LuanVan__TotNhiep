@@ -26,7 +26,7 @@ export const getMovieSearchAPI = (tenPhim,history) =>{
         try{
             const res = await axios({
                 method : "GET",
-                url : `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09&tenPhim=${tenPhim}`
+                url : `http://localhost:8000/api/search/${tenPhim}`
             })
             history.push({ pathname: `/detail/${res.data[0].maPhim}` })
             dispatch(getMovieSearchSuccess(res.data));

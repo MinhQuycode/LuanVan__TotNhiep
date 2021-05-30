@@ -13,11 +13,6 @@ import Loading from "./Layouts/Loading/Loading";
 import Booking from './pages/Booking/Booking';
 import {useDispatch} from "react-redux";
 import Account from './pages/Account/Account';
-// animation
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 import ScrollToTop from './Layouts/ScrollToTop/ScrollToTop';
 
 function App() {

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import screen from "../../assets/images/screen.png";
 import ChairRoom from "./ChairRoom";
 import InforBookChair from "./InforBookChair";
-import { getChairListAPI } from "../../redux/actions/booking.action";
+import { getChairListAPI, resetReducerChair } from "../../redux/actions/booking.action";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./../../Layouts/Loading/Loading";
 import {Redirect} from "react-router-dom";
@@ -16,14 +16,15 @@ export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
   // console.log(inforBK)
   let chairList = useSelector((state) => state.chair.chairList);
-  console.log(chairList);
   let error = useSelector((state) => state.chair.error);
   // console.log(error);
   const { id } = useParams();
   const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
   // console.log(userSignIn);
-  
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetReducerChair());
+  },[])
   useEffect(() => {
     dispatch(getChairListAPI(id));
   }, [dispatch,id]);
@@ -32,7 +33,6 @@ export default function Booking(props) {
   const chunkArray = (myArray, chunk_size) => {
     var results = [];
     while (myArray.length) {
-      // console.log(myArray.length);
       results.push(myArray.splice(0, chunk_size));
     }
     return results;
@@ -116,7 +116,7 @@ export default function Booking(props) {
           </div>
         </div>
         <div className="col-lg-4 col-md-12">
-          <InforBookChair info={inforBK} />
+          <InforBookChair info={inforBK}/>
         </div>
       </div>
     </section>

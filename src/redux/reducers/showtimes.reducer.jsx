@@ -1,4 +1,4 @@
-import { GET_SHOWTIMES_FAILED,GET_SHOWTIMES_SUCCESS,POST_DATE_CHOOSED,GET_SHOWTIMES_REQUEST,POST_ID_THEATER_CHOOSE,POST_THEATERGROUP_CHOOSED } from "../constants/showtimes.constant";
+import { POST_DATE_REDUCER,GET_SHOWTIMES_FAILED,GET_SHOWTIMES_SUCCESS,POST_DATE_CHOOSED,GET_SHOWTIMES_REQUEST,POST_ID_THEATER_CHOOSE,POST_THEATERGROUP_CHOOSED } from "../constants/showtimes.constant";
 
 const initialState = {
     loading :false,
@@ -17,6 +17,7 @@ const initialState = {
 
 const showTimesReducer = (state = initialState, action) => {
     let {type,payload} = action;
+    // state.dateGroupChoosed.date = state.showTimes?.map((item)=>{item[0].date.substring(5,10)});
     switch (type) {
     case GET_SHOWTIMES_REQUEST:
         state.loading = true;
@@ -43,7 +44,9 @@ const showTimesReducer = (state = initialState, action) => {
     case POST_THEATERGROUP_CHOOSED:
 		state.theaterGroupChoosed = payload;
 		return { ...state };
-    
+    case POST_DATE_REDUCER:
+        state.dateGroupChoosed.date = payload;
+        return {...state};
     case POST_DATE_CHOOSED:
         state.dateGroupChoosed = payload;
         return {...state};

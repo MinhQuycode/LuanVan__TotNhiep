@@ -14,20 +14,18 @@ body {
   line-height: $line-height-default;
   font-size: $fs-14;
   font-weight: 400;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial;
 }
 
 a,
 a:hover {
   color: $color-black-1;
   text-decoration: none;
-  // transition: all 0.2s;
 }
 img {
   border-radius: $border-radius;
   max-width: 100%;
   display: block;
-  // width: 100%;
 }
 button:focus,
 .btn:hover {

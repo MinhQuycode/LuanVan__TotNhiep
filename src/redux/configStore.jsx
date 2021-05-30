@@ -11,6 +11,7 @@ import chairListReducer from "./reducers/booking.reducer";
 import inforMovieReducer from "./reducers/inforMovie.reducer";
 import movieSearch from "./reducers/searchMovie.reducer";
 import inforAcountReducer from "./reducers/inforAccount.reducer";
+import detailTicketReducer from "./reducers/detailTicketUser.reducer";
 
 const rootReducer = combineReducers({
   //reducer khai báo tại đây
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   chair : chairListReducer,
   inforMovie : inforMovieReducer,
   movieSearch : movieSearch,
-  account : inforAcountReducer
+  account : inforAcountReducer,
+  ticket : detailTicketReducer
 });
 
 //Tham số thứ 2 của midleware khai báo tại đây

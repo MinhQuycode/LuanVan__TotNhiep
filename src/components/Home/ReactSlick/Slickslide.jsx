@@ -12,7 +12,7 @@ function Slickslide(props) {
 
     useEffect(() => {
         dispatch(getMovieListAPI());
-    }, []);
+    },[]);
 
     const renderListMovie = () =>{
         return (
@@ -65,7 +65,7 @@ function Slickslide(props) {
         <section id="slide__movie">
             <ul className="nav nav-pills justify-content-center title">
                 <li className="nav-item">
-                    <a className="nav-link active" data-toggle="pill" href="#dangChieu">Đang chiếu</a>
+                    <a className="nav-link active" data-toggle="pill" href="#dangChieu" style={{color:'orangered',fontWeight:"bold"}}>Đang chiếu</a>
                 </li>
             </ul>
             <div className="tab-content slideMovie__item">

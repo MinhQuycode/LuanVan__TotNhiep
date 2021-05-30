@@ -104,6 +104,12 @@ function SignIn(props) {
       if(!valid) {
         Swal.fire({
           title : 'Lỗi!',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
           text: 'Dữ liệu chưa hợp lệ !',
           icon: 'error',
           confirmButtonText : 'Ok'

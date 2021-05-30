@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_CHAIR_FAILED,GET_CHAIR_REQUEST,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
+import {RESET_RESPONSE,GET_CHAIR_FAILED,GET_CHAIR_REQUEST,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
 
 
 export const getChairActionSuccess = (data) =>{
@@ -36,6 +36,12 @@ export const getChairListAPI = (maLichChieu) =>{
     }
 }
 
+//action reset reducer chọn ghế
+export const resetReducerChair = () =>{
+  return {
+    type : RESET_BOOKING_CHAIR,
+  }
+}
 export const bookChairAction = (maGhe,giaVe,tenGhe,hang) =>{
   return {
       type : BOOK_TICKET,
@@ -48,11 +54,16 @@ export const bookChairAction = (maGhe,giaVe,tenGhe,hang) =>{
   }
 }
 
+export const getResponseBookingAPI = (response) =>{
+    return {
+      type : MSG_BOOKING,
+      payload : response
+    }
+}
 
 export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,user_id) => {
     return async (dispatch) => {
       try {
-        const user = JSON.parse(localStorage.getItem("userLogin"));
         const res = await axios({
           method: "POST",
           url: "http://localhost:8000/api/booking",
@@ -64,8 +75,9 @@ export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,us
             user_id,
           },
         });
+        dispatch(getResponseBookingAPI(res.data));
       } catch (error) {
-        console.log(error);
+        console.log(error); 
       }
     };
   };

@@ -16,7 +16,7 @@ import { signUpAPI } from '../../redux/actions/register.action';
 import Swal from 'sweetalert2';
 import {useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
-import Error from '../../Layouts/Error/Error';
+import ErrorRgt from '../../Layouts/Error/ErrorRgt';
 import Loading from "./../../Layouts/Loading/Loading";
 
 
@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
 
 function SignUp(props) {
   const history = useHistory();
@@ -130,27 +129,41 @@ const handleSubmit = (event) =>{
     }
   }
   
+  console.log(props.message?.status);
   if(!valid){
     Swal.fire({
       title: 'Lỗi!',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
       text: 'Dữ liệu chưa hợp lệ !',
       icon: 'error',
       confirmButtonText: 'Ok'
     })
     return;
   }else {
-    if(valid && props.error !== null){
-      Swal.fire({
-        title: 'Thành công!',
-        text: 'Dữ liệu hợp lệ !',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      })
-    }
+      if(!props.message?.status === "fails"  && valid){
+        Swal.fire({
+          title: 'Thành công!',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          text: 'Dữ liệu hợp lệ !',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+         dispatch(signUpAPI(user.values,history));
+        history.push("/login");
+      }
   }
-  dispatch(signUpAPI(user.values,history));
-  // console.log(user);
 };
+
 const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
 
   if(props.loading) return (<Loading/>)
@@ -246,7 +259,7 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
                 label="Tôi muốn nhận thông báo mới nhất !"
                 checked
               />
-              {props.error && <Error message={props.error?.name}/>}
+              {props.message?.data && <ErrorRgt message={props.message?.data}/>}
             </Grid>
           </Grid>
           <Button
@@ -266,14 +279,16 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
             </Grid>
           </Grid>
         </form>
-      </div> <br/> <br/>
+      </div><br/><br/>
     </Container>
   ):(
     <Redirect to="/"/>
   );
 }
+
 const mapStateToProps = (state) =>({
-  error : state.userRegister.error,
-  loading : state.userRegister.loading
+  error : state.userRegister.errors,
+  loading : state.userRegister.loading,
+  message : state.userRegister.userRegister
 })
 export default connect(mapStateToProps)(SignUp)

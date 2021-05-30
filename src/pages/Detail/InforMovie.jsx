@@ -31,7 +31,7 @@ windowDimensions.width <= 815 ?  col = "col-12" : col = "col-6";
 const renderStar = (n) =>{
   var ListProduct = [];
   for (var i = 0; i < n; i++) {
-    ListProduct = ListProduct.concat(<i key={i} style={{ color: "white",height:'17px' }} className="fas fa-star"></i>);
+    ListProduct = ListProduct.concat(<i key={i} style={{ color: "red",height:'17px' }} className="fas fa-star"></i>);
   };
   return ListProduct;
 }
@@ -71,7 +71,8 @@ const n = getRandomInt();
           </div>
         </div>
         <div className={`${col} detail__text`}>
-          <h3>{props.infor?.name}</h3>
+          <h2 className="info__tiltle">Thông tin phim</h2>
+          <h5>{props.infor?.name}</h5>
           <p>
             <span>Mô tả :</span> {props.infor?.content}{" "}
           </p>
