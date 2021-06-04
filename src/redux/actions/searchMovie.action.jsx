@@ -26,7 +26,7 @@ export const getMovieSearchAPI = (tenPhim,history) =>{
         try{
             const res = await axios({
                 method : "GET",
-                url : `http://localhost:8000/api/search/${tenPhim}`
+                url : `http://cinemasummary.herokuapp.com/api/search/${tenPhim}`
             })
             if(res.data.length === 1){
                 history.push({pathname:`/detail/${res.data[0].id}`})
