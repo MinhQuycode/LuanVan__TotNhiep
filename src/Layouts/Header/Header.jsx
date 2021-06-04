@@ -11,9 +11,6 @@ function Header(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const movieSearch = useSelector(state => state.movieSearch.movieSearch);
-  // console.log(movieSearch)
-
   const handleLogout = (event) => {
     event.preventDefault();
     dispatch(actLogout(event,history));

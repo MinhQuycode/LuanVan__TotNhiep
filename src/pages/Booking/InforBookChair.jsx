@@ -12,7 +12,6 @@ export default function InforBookChair(props) {
   const {info} = props;
   const history = useHistory();
   const chairBooking = useSelector((state) => state.chair.chairBooking);
-  // console.log(chairBooking)
   const dispatch = useDispatch();
   // Mã lịch chiếu
   const { id } = useParams();
@@ -46,7 +45,6 @@ export default function InforBookChair(props) {
         maGhe : ve.maGhe
     }
   ))
-  // console.log(danhSachVe)
   //Sô lượng
   if(danhSachVe && danhSachVe.length > 0){
     var quantity = null,
@@ -55,7 +53,6 @@ export default function InforBookChair(props) {
   // Lấy message từ API booking
   const message = useSelector(state => state.chair.response);
   var resMessage = message?.status;
-  console.log(message);
   //Submit 
   const submitAPI = () =>{
     Swal.fire({

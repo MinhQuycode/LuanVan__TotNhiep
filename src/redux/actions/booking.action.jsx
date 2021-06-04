@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RESET_RESPONSE,GET_CHAIR_FAILED,GET_CHAIR_REQUEST,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
+import {GET_CHAIR_FAILED,GET_CHAIR_REQUEST,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
 
 
 export const getChairActionSuccess = (data) =>{
@@ -26,7 +26,7 @@ export const getChairListAPI = (maLichChieu) =>{
         try {
             const res = await axios({
                 method : 'GET',
-                url:`http://localhost:8000/api/room-seat/${maLichChieu}`
+                url:`https://cinemasummary.herokuapp.com/api/room-seat/${maLichChieu}`
             })
             dispatch(getChairActionSuccess(res.data));
         } catch (error) {
@@ -66,7 +66,7 @@ export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,us
       try {
         const res = await axios({
           method: "POST",
-          url: "https://cinemasummary.herokuapp.com/api/booking",
+          url: "http://cinemasummary.herokuapp.com/api/booking",
           data: {
             maLichChieu,   
             totalAmount,

@@ -28,10 +28,15 @@ export const getMovieSearchAPI = (tenPhim,history) =>{
                 method : "GET",
                 url : `http://localhost:8000/api/search/${tenPhim}`
             })
-            history.push({ pathname: `/detail/${res.data[0].maPhim}` })
+            if(res.data.length === 1){
+                history.push({pathname:`/detail/${res.data[0].id}`})
+            }else{
+                history.push("/search");
+            }
             dispatch(getMovieSearchSuccess(res.data));
         }catch (error) {
             dispatch(getMovieSearchFailed(error));
+            // history.push("/home");
             return Swal.fire({
                 title: "Không có phim này !!!",
                 icon: 'error',

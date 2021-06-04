@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import PropTypes from "prop-types";
 
 function Error(props) {
   // console.log(props.message)
@@ -8,9 +7,5 @@ function Error(props) {
     return <div className="alert alert-danger">{messages}</div>;
   }
 }
-
-Error.propTypes = {
-  messages: PropTypes.string.isRequired,
-};
 
 export default memo(Error);

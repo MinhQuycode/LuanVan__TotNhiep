@@ -74,7 +74,6 @@ function TimeMovie() {
           {movie
             ?.filter((item) => item.id === showTime)
             .map((img, index) => {
-              console.log(img);
               return (
                 <div className="row" key={index}>
                   <div className="col-4">

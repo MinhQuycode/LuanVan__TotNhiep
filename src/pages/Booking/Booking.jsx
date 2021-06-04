@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect} from "react";
 import screen from "../../assets/images/screen.png";
 import ChairRoom from "./ChairRoom";
 import InforBookChair from "./InforBookChair";

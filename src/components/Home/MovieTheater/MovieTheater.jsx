@@ -23,14 +23,14 @@ function MovieTheater(props) {
 		setIsSelected(index);
 		dispatch(postTheaterGroup(id,logo));
 	};
-
+    const httpImg = "https://cinemasummary.herokuapp.com";
     const renderTheater = () => {
         return (
             listTheater?.map((theater,index) =>{
                 return (
                     <div key={index} className={`col-2 cumrap__item ${isSelected===index ? Active : nonClassActive}`}  
                     onClick={() => (isSelected === index ? '' : chooseTheaterGroup(theater.id,theater.logo, index))}>
-                        <img src={theater.logo} alt="anh"/>
+                        <img src={httpImg.concat(theater.logo)} alt="anh"/>
                     </div>
                 )
             })

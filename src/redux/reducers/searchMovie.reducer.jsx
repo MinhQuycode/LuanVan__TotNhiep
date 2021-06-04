@@ -1,7 +1,7 @@
 import {SEARCH_MOVIE_FAILED,SEARCH_MOVIE_SUCCESS,SEARCH_MOVIE_REQUEST} from "../constants/searchMovie.constant";
 const initialState = {
     loading : null,
-    movieSearch :null,
+    movieSearch :[],
     error : null,
 }
 
@@ -11,7 +11,7 @@ const movieSearch = (state = initialState, action) => {
 
     case SEARCH_MOVIE_REQUEST:
         state.loading = true;
-        state.movieSearch = null;
+        state.movieSearch = [];
         state.error = null;
         return { ...state}
 
@@ -23,7 +23,7 @@ const movieSearch = (state = initialState, action) => {
 
     case SEARCH_MOVIE_FAILED:
         state.loading = null;
-        state.movieSearch = null;
+        state.movieSearch = [];
         state.error = payload;
         return { ...state}
 

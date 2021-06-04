@@ -38,7 +38,7 @@ export default function Account() {
           <div className="col-9 tiltle__contents">
             <div className="tab-content" id="nav-tabContent">
              <InfoAccount info={info}/>
-             <ChangeAccount/>
+             <ChangeAccount info={info}/>
              <HistoryBooking ticket={ticket}/>
             </div>
           </div>

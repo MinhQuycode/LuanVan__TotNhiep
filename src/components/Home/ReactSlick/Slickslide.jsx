@@ -9,11 +9,9 @@ import Loading from './../../../Layouts/Loading/Loading'
 
 function Slickslide(props) {
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(getMovieListAPI());
     },[]);
-
     const renderListMovie = () =>{
         return (
             props.movieDetail?.map((item,index) =>{

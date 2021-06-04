@@ -21,6 +21,7 @@ function Theater() {
     let nonClassActive = 'non_active_theater';
     let Active = 'active_theater'
     let theaterTheoHeThong = stateTheater?.filter((tile) => tile.theaters_id === logoTheater.maHeThongRap)
+    const httpImg = "https://cinemasummary.herokuapp.com";
     const renderTheater = () =>{
         return (
           theaterTheoHeThong?.map((cinemas,index) =>{
@@ -28,7 +29,7 @@ function Theater() {
                 return (
                   <div key={index} className={`chon__item ${isRowSelected===index ? Active : nonClassActive}`}  
                   onClick={() => (isRowSelected === index ? '' : chooseTheater(cinemas.id,index))}>
-                    <img src={logoTheater.logo} alt="anh"/>
+                    <img src={httpImg.concat(logoTheater.logo)} alt="anh"/>
                     <div className="detail__rap">
                       <h5 className="tenRap">{cinemas.name}</h5>
                       <p className="diaChi">

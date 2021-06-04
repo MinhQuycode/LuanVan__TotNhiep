@@ -14,6 +14,7 @@ import Booking from './pages/Booking/Booking';
 import {useDispatch} from "react-redux";
 import Account from './pages/Account/Account';
 import ScrollToTop from './Layouts/ScrollToTop/ScrollToTop';
+import SearchMovies from './pages/SearchMovies/SearchMovies';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
       <Route exact path="/" component={Home}/>
       <Route exact path="/booking/:id" component={Booking}/>
       <Route exact path="/account" component={Account}/>
+      <Route exact path="/search" component={SearchMovies}/>
       <Route path="*" component={Notfound}/>
       </Switch>
       <Footer/>

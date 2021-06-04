@@ -37,8 +37,6 @@ export const signInAPI = (user,history) =>{
             dispatch(signInActionSuccess(res.data));
             //Lưu trên localstrorage
             localStorage.setItem("userLogin",JSON.stringify(res.data));
-            //Chuyển về trang trước khi đăng nhập thành công
-            // history.push("/home");
             history.goBack();
         } catch(error){
             dispatch(signInActionFailed(error));

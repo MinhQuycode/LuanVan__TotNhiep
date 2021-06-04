@@ -120,15 +120,13 @@ function ShowTimeMovie(props) {
       }
       //Lấy thời gian chiếu theo ngày
       const day = showTimeWithDate();
-      // console.log(day);
-
+      // API booking nó có vấn đề j z ta
 
       const chooseDateGroup = (date,index)=>{
         setIsSelectedDate(index);
         dispatch(postDateGroup(date,index));
     }
       const dateSelect = useSelector(state => state.showTimes.dateGroupChoosed);
-      // console.log(dateSelect);
       //REDER CINEMAS
       const cinemas12 = () =>{
         return(
@@ -170,6 +168,7 @@ function ShowTimeMovie(props) {
 
     let nonClassActive = 'non_active_theater';
     let Active = 'active_theater';
+    const httpImg = "http://cinemasummary.herokuapp.com" 
     const renderTheater = () =>{
         return (
           arrayTimeMovie?.map((theater)=>{
@@ -181,7 +180,7 @@ function ShowTimeMovie(props) {
                          isSelected === index ? '':chooseTheaterGroup(itemtt.id,itemtt.logo,index)
                       )} 
                   >
-                    <img src={itemtt?.logo} alt="anh"/>
+                    <img src={httpImg.concat(itemtt?.logo)} alt="anh"/>
                     <span style={{fontWeight:'bold'}}>{itemtt?.name}</span>
                   </div>
                     )
@@ -222,7 +221,7 @@ windowDimensions.width <= 845 ?  col2 = "col-12" : col2 = "col-8";
                       return (
                         <div className="branch" key={index}>
                           <div className="branch--theater">
-                            <img src={theaterChoose.logo} alt="anh" />
+                            <img src={httpImg.concat(theaterChoose.logo)} alt="anh" />
                               <div>
                                 <span style={{ fontWeight: "bold" }}>
                                   {item.name}

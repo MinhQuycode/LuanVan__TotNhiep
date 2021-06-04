@@ -26,7 +26,7 @@ export const getInforAccountAPI = () =>{
             const user = JSON.parse(localStorage.getItem("userLogin"));
             const res = await axios({
                 method:'GET',
-                url:`https://cinemasummary.herokuapp.com/api/user`,
+                url:`http://cinemasummary.herokuapp.com/api/user`,
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
                   },
@@ -61,7 +61,7 @@ export const getInforDetailTicketAPI = (idUser) =>{
         try {
             const res  = await axios({
                 method:"GET",
-                url:`http://localhost:8000/api/list-ticket/${idUser}`
+                url:`http://cinemasummary.herokuapp.com/api/list-ticket/${idUser}`
             })
             dispatch(getInforDetailTicketSuccess(res.data))
         } catch (error) {

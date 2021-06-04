@@ -5,7 +5,7 @@ const initialState = {
     showTimes : [],
     theaterGroupChoosed: {
 		maHeThongRap: 1,
-		logo: 'https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/logo.png',
+		logo: '/images/theaters/bhd.png',
 	},
     dateGroupChoosed:{
         date : [],
