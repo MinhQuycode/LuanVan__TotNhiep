@@ -5,8 +5,7 @@ import InforBookChair from "./InforBookChair";
 import { getChairListAPI, resetReducerChair } from "../../redux/actions/booking.action";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./../../Layouts/Loading/Loading";
-import {Redirect} from "react-router-dom";
-import { useParams } from "react-router-dom";
+import {Redirect,useParams} from "react-router-dom";
 import ScrollToTop from "../../Layouts/ScrollToTop/ScrollToTop";
 import TimeBooking from "./TimeBooking";
 import Notfound from "../PageNotFound/Notfound";
@@ -14,13 +13,10 @@ import NameChair from "./NameChair";
 
 export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
-  // console.log(inforBK)
   let chairList = useSelector((state) => state.chair.chairList);
   let error = useSelector((state) => state.chair.error);
-  // console.log(error);
   const { id } = useParams();
   const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
-  // console.log(userSignIn);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetReducerChair());
@@ -41,7 +37,6 @@ export default function Booking(props) {
   if(chairList && chairList.length > 0){
     var countChair = chairList.length
   }
-  // console.log(countChair)
   switch (countChair) {
     case 120:
     case 144:
@@ -58,7 +53,6 @@ export default function Booking(props) {
       console.log("Không tồn tại mảng ghế !")
       break;
   }
-  // console.log(result);
 
   const renderChairList = () => {
     return result?.map((item, index) => {

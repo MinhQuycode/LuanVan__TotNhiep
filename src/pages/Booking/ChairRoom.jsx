@@ -9,13 +9,11 @@ export default function ChairRoom(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     const chairBooking = useSelector(state => state.chair.chairBooking);
-    // console.log(chairBooking)
 
     const  renderRowChair = () => {
         let theMiddle = Math.floor(chair.length / 2);
         return (
             chair?.map((item,index) =>{
-                // console.log(item)
                 let disabled = false;
                 let loaiGhe = "";
                 if(item.seat_type.type === "standard"){

@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {bookingTicketAPI,resetReducerChair} from "./../../redux/actions/booking.action";
+import {bookingTicketAPI,resetReducerChair, stopTimeBooking} from "./../../redux/actions/booking.action";
 import visa from "./../../assets/images/visa_mastercard.png";
 import atm from "./../../assets/images/ATM.png";
 import Swal from "sweetalert2";
@@ -21,7 +21,7 @@ export default function InforBookChair(props) {
   const user_id = useSelector(state => state.account.account.id);
   useEffect(() => {
     dispatch(getInforAccountAPI())
-  }, [])
+  },[])
 
   const rederInforBookingChair = () => {
     return chairBooking.map((item, index) => {

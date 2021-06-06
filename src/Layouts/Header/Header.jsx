@@ -1,10 +1,12 @@
-import React,{useState} from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React,{useState,useEffect} from "react";
+import { NavLink, useHistory} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { connect } from "react-redux";
 import { actLogout } from "../../redux/actions/login.action";
 import { useDispatch} from "react-redux";
 import {getMovieSearchAPI} from "./../../redux/actions/searchMovie.action";
+import { useLocation } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 function Header(props) {
   const [state, setstate] = useState({nameMovie:''});
@@ -25,13 +27,23 @@ function Header(props) {
     dispatch(getMovieSearchAPI(state.nameMovie,history));
   }
 
+  const { hash } = useLocation();
+  console.log(hash)
+  const [isHashLink, setIsHashLink] = useState(false);
+  useEffect(() => {
+    if (hash.includes("#")) {
+      setIsHashLink(true);
+    } else {
+      setIsHashLink(false);
+    }
+  }, [hash]);
+
   return (
     <header>
       <nav className="navbar navbar--header navbar-expand-lg navbar-dark">
         <NavLink className="ml-3 navbar-brand" to="/">
-          <img className="img-fluid logoWeb" src={logo} alt="logo" />
+          <img className="img-fluid logoWeb" src={logo} alt="logo" onClick={() => window.scrollTo(0, 0)} />
         </NavLink>
-
         <form className="search__header1 input-group" onSubmit={handleSubmit}>
           <div className=" input-group-prepend">
             <button className="input--header input-group-text" id="basic-addon1" type="submit">
@@ -60,24 +72,24 @@ function Header(props) {
         <div className="myMenu collapse navbar-collapse" id="collapsibleNavbar">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="#slide__movie">
-                Lịch chiếu
-              </a>
+              <Link className="nav-link" to="/#slide__movie" replace={isHashLink}>
+                Lịch Chiếu
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#cumrap">
+              <Link className="nav-link" to="/#cumrap" replace={isHashLink}>
                 Cụm rạp
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#new">
+              <Link className="nav-link" to="/#new" replace={isHashLink}>
                 Tin tức
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#ungdung">
+              <Link className="nav-link" to="/#ungdung" replace={isHashLink}>
                 Ứng dụng
-              </a>
+              </Link>
             </li>
             {props.credential ? (
               <>
@@ -158,7 +170,6 @@ function Header(props) {
     </header>
   );
 }
-//Lấy dữ liệu từ store về
 const mapStateToProps = (state) => {
   return {
     credential: state.user.userSignin,

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_CHAIR_FAILED,GET_CHAIR_REQUEST,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
+import {STOP_TIME_BOOKING,GET_CHAIR_FAILED,GET_CHAIR_REQUEST,RESET_BOOKING_CHAIR,MSG_BOOKING,GET_CHAIR_SUCCESS,BOOK_TICKET} from "../constants/booking.constant";
 
 
 export const getChairActionSuccess = (data) =>{
@@ -59,6 +59,12 @@ export const getResponseBookingAPI = (response) =>{
       type : MSG_BOOKING,
       payload : response
     }
+}
+export const stopTimeBooking = (handlePause) =>{
+  return {
+    type : STOP_TIME_BOOKING,
+    payload : {handlePause}
+  }
 }
 
 export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,user_id) => {

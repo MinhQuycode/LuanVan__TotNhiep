@@ -8,7 +8,6 @@ function TimeMovie() {
   const idTheaterChoose = useSelector(
     (state) => state.showTimes.idTheaterChoose
   );
-  // console.log(idTheaterChoose)
   const codeTheater = useSelector(
     (state) => state.showTimes.theaterGroupChoosed
   );
@@ -16,13 +15,15 @@ function TimeMovie() {
   const dispatch = useDispatch();
 
   const userSignIn = useSelector((state) => state.user.userSignin);
-  // console.log(userSignIn);
 
   const handleChoiceShowsTime = (id) => {
     if (userSignIn?.access_token?.length > 0) {
       history.push({ pathname: `/booking/${id}` });
     } else {
       history.push({ pathname: "/login" });
+      // if(userSignIn?.access_token?.length > 0){
+      //   history.push({ pathname: `/booking/${id}` });
+      // }
     }
   };
 
@@ -31,11 +32,9 @@ function TimeMovie() {
   }, [dispatch]);
 
   const movie = useSelector((state) => state.movie.movieList);
-  // console.log(movie);
 
   //Lấy thời gian lịch chiếu
   const stateShowtime = useSelector((state) => state.showTimes.showTimes);
-  // console.log(stateShowtime);
 
   //Lấy lịch chiếu theo rạp cụ thể
   let theaterTheoHeThong = stateShowtime?.filter(
@@ -47,16 +46,13 @@ function TimeMovie() {
   //Lọc ra nhưng phim khác nhau theo lịch chiếu của Rạp
   // Lấy id theater
   let MovieId = theaterTheoHeThong?.map((Idmovie) => Idmovie.movies_id);
-  // console.log(MovieId);
 
   let movieTheater = MovieId?.filter((item, i, ar) => ar.indexOf(item) === i);
-  // console.log(movieTheater);
 
   const TimOfMovie = () => {
     let arrTimeMovie = [];
     for (let index = 0; index < movieTheater?.length; index++) {
       const element = movieTheater[index];
-      // console.log(element);
       let time = theaterTheoHeThong.filter(
         (item) => item.movies_id === element
       );
