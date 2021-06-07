@@ -14,17 +14,11 @@ export default function Account() {
   const history = useHistory();
   const info = useSelector((state) => state.account.account);
   const loading = useSelector((state) => state.account.loading);
-  const ticket = useSelector((state) => state.ticket.ticket);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getInforAccountAPI());
   }, []);
-  useEffect(() => {
-    if(info.id){
-      dispatch(getInforDetailTicketAPI(info.id));
-    }
-  }, [info.id]);
 
   const user = JSON.parse(localStorage.getItem("userLogin"));
   
@@ -39,7 +33,7 @@ export default function Account() {
             <div className="tab-content" id="nav-tabContent">
              <InfoAccount info={info}/>
              <ChangeAccount info={info}/>
-             <HistoryBooking ticket={ticket}/>
+             <HistoryBooking/>
             </div>
           </div>
         </div>

@@ -1,34 +1,59 @@
-import {GET_INFOR_ACCOUNT_FAILED,GET_INFOR_ACCOUNT_SUCCESS,GET_INFOR_ACCOUNT_REQUEST } from "../constants/inforAccount.constant";
+import {
+  GET_INFOR_ACCOUNT_FAILED,
+  GET_INFOR_ACCOUNT_SUCCESS,
+  GET_INFOR_ACCOUNT_REQUEST,
+  UPDATE_INFOR_REQUEST,
+  UPDATE_INFOR_SUCCESS,
+  UPDATE_INFOR_FAILED
+} from "../constants/inforAccount.constant";
 const initialState = {
-    loading : null,
-    account : [],
-    error : null,
-}
+  loading: null,
+  account: [],
+  update : [],
+  error: null,
+};
 
-const inforAcountReducer =  (state = initialState, action ) => {
-    let { type, payload } = action;
-    switch (type) {
-
+const inforAcountReducer = (state = initialState, action) => {
+  let { type, payload } = action;
+  switch (type) {
     case GET_INFOR_ACCOUNT_REQUEST:
-        state.loading = true;
-        state.account = [];
-        state.error = null;
-        return { ...state}
+      state.loading = true;
+      state.account = [];
+      state.error = null;
+      return { ...state };
 
     case GET_INFOR_ACCOUNT_SUCCESS:
-        state.loading = null;
-        state.account = payload;
-        state.error = null;
-        return { ...state}
+      state.loading = null;
+      state.account = payload;
+      state.error = null;
+      return { ...state };
 
     case GET_INFOR_ACCOUNT_FAILED:
-        state.loading = null;
-        state.account = [];
-        state.error = payload;
-        return { ...state}
+      state.loading = null;
+      state.account = [];
+      state.error = payload;
+      return { ...state };
+
+    case UPDATE_INFOR_REQUEST:
+      state.loading = true;
+      state.account = [];
+      state.error = null;
+      return { ...state };
+
+    case UPDATE_INFOR_SUCCESS:
+      state.loading = null;
+      state.update = payload;
+      state.error = null;
+      return { ...state };
+
+    case UPDATE_INFOR_FAILED:
+      state.loading = null;
+      state.account = [];
+      state.error = payload;
+      return { ...state };
     default:
-        return state
-    }
-}
+      return state;
+  }
+};
 
 export default inforAcountReducer;
