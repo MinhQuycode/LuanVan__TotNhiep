@@ -97,15 +97,6 @@ const handleChange = (event) =>{
         newError[name] = '';
       }
    }
-   
-  //  if (name === "soDt") {
-  //   const parternSodt = /((09|03|07|08|05)+([0-9]{8})\b)/; 
-  //     if(!parternSodt.test(value)){
-  //       newError[name] ="*Số điện thoại không hợp lệ !!.(VD: 0364567890)";
-  //     } else {
-  //       newError[name] = '';
-  //     }
-  // }
    setUser ({
       values :newValue,
       errors :newError,
@@ -129,7 +120,7 @@ const handleSubmit = (event) =>{
     }
   }
   
-  console.log(props.message?.status);
+  // console.log(props.message?.status);
   if(!valid){
     Swal.fire({
       title: 'Lỗi!',

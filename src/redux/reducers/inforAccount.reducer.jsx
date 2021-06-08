@@ -1,15 +1,11 @@
 import {
   GET_INFOR_ACCOUNT_FAILED,
   GET_INFOR_ACCOUNT_SUCCESS,
-  GET_INFOR_ACCOUNT_REQUEST,
-  UPDATE_INFOR_REQUEST,
-  UPDATE_INFOR_SUCCESS,
-  UPDATE_INFOR_FAILED
+  GET_INFOR_ACCOUNT_REQUEST
 } from "../constants/inforAccount.constant";
 const initialState = {
   loading: null,
   account: [],
-  update : [],
   error: null,
 };
 
@@ -29,24 +25,6 @@ const inforAcountReducer = (state = initialState, action) => {
       return { ...state };
 
     case GET_INFOR_ACCOUNT_FAILED:
-      state.loading = null;
-      state.account = [];
-      state.error = payload;
-      return { ...state };
-
-    case UPDATE_INFOR_REQUEST:
-      state.loading = true;
-      state.account = [];
-      state.error = null;
-      return { ...state };
-
-    case UPDATE_INFOR_SUCCESS:
-      state.loading = null;
-      state.update = payload;
-      state.error = null;
-      return { ...state };
-
-    case UPDATE_INFOR_FAILED:
       state.loading = null;
       state.account = [];
       state.error = payload;

@@ -5,9 +5,7 @@ import {getInforDetailTicketAPI} from "./../../redux/actions/inforAccount.action
 export default function HistoryBooking(props) {
   const ticket = useSelector((state) => state.ticket.ticket);
   const dispatch = useDispatch();
-  console.log(ticket);
   const info = useSelector((state) => state.account.account);
-  console.log(info)
   const [state, setState] = useState({
     display1: "",
     display2: "d-none",
@@ -19,7 +17,6 @@ export default function HistoryBooking(props) {
       urlDetailTicket : `https://cinemasummary.herokuapp.com/api/list-ticket/${info.id}`
     }
   );
-    console.log(stateUrl.urlDetailTicket)
   useEffect(() => {
       dispatch(getInforDetailTicketAPI(stateUrl.urlDetailTicket));
   }, [stateUrl.urlDetailTicket]);

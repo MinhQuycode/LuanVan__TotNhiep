@@ -29,8 +29,8 @@ export default function InfoAccount(props) {
         <div className="col-8 info__user">
           <p>Tên : {info.name}</p>
           <p>Email : {info.email}</p>
-          <p>SĐT : 0987654321</p>
-          <p>Địa chỉ : Hồ Chí Minh</p>
+          <p>SĐT : {!info.phone_number ? "Bạn có thể thêm vào !" : ""}</p>
+          <p>Địa chỉ : {!info.address ? "Bạn có thể thêm vào !" : ""}</p>
           <button
             className="btn__info"
             onClick={() => {
