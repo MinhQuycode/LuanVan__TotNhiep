@@ -83,7 +83,6 @@ function SignIn(props) {
         errors :newError,
      });
   };
-  
   const handleSubmit = (event) =>{
     // console.log(event)
     event.preventDefault();

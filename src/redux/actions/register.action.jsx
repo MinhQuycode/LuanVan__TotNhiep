@@ -31,7 +31,6 @@ export const signUpAPI = (user,history) =>{
             });
             dispatch(signUpActionSuccess(res));
             // history.push("/login");
-            //Chuyển về trang đăng nhập khi đăng ký thành công
         } catch(error){
             dispatch(signUpActionFailed(error));
         }

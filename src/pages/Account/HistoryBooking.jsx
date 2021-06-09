@@ -4,8 +4,10 @@ import {getInforDetailTicketAPI} from "./../../redux/actions/inforAccount.action
 
 export default function HistoryBooking(props) {
   const ticket = useSelector((state) => state.ticket.ticket);
+  console.log(ticket)
   const dispatch = useDispatch();
   const info = useSelector((state) => state.account.account);
+  const { name, phone_number, address} = props.info;
   const [state, setState] = useState({
     display1: "",
     display2: "d-none",
@@ -36,7 +38,7 @@ export default function HistoryBooking(props) {
               <td>{ticket.TenRap}</td>
               <td>{ticket.Phong}</td>
               <td>{ticket.Ghe}</td>
-              <td>{ticket.total_amount}</td>
+              <td>{ticket.total_amount}K</td>
               <td>
                 <button
                   className="btn__ticket"
@@ -84,12 +86,33 @@ export default function HistoryBooking(props) {
             <td>{ticket.NgayChieu}</td>
             <td>{ticket.GioChieu}</td>
             <td>{ticket.Ghe}</td>
-            <td>{ticket.total_amount}</td>
+            <td>{ticket.total_amount}K</td>
           </tr>
         </tbody>
       );
     });
   };
+  //Creat arr button
+  const arrIndex = [];
+  for (let index = 1; index <= ticket.last_page; index++) {
+    arrIndex.push(index);
+  }
+  const renderBtnNvg = () =>{
+    return(
+      arrIndex.map((item,index)=>{
+        return(
+          <button value={item} className={`page__link ${item === ticket.current_page ? "active":""}`} key={index}
+          onClick={()=>{
+            setstateUrl({
+              urlDetailTicket : `https://cinemasummary.herokuapp.com/api/list-ticket/${info.id}?page=${item}`
+            })
+          }}
+          >{item}</button>
+        )
+      })
+    )
+  }
+
   let active__null1 = " ";
   let active__null2 = " ";
   if(!ticket.prev_page_url){
@@ -98,10 +121,6 @@ export default function HistoryBooking(props) {
   if(!ticket.next_page_url){
     active__null2 = "active__null"
   }
-  let check1;
-  !ticket.prev_page_url ? check1 = true : check1 = false;
-  let check2;
-  !ticket.next_page_url ? check2 = true : check2 = false;
   return (
     <div
       className="tab-pane fade"
@@ -128,26 +147,26 @@ export default function HistoryBooking(props) {
         <nav className="navigation">
           <ul className="navigation__ticket">
             <li className="page__item">
-              <button disabled={check1} className={`page__link ${active__null1}`}
+              <button className={`page__link ${active__null1}`}
                 onClick={()=>{
                 setstateUrl({
                   urlDetailTicket : ticket.prev_page_url
                 })
             }}>
-                <span>«</span>
+                <span>« Previous</span>
               </button>
             </li>
-            <li className="page__item" style={{color:"orangered",fontWeight:"bold",fontSize:"17px"}}>
-              {ticket.current_page}
+            <li className="page__item">
+             {renderBtnNvg()}
             </li>
             <li className="page__item">
-              <button disabled={check2} className={`page__link ${active__null2}`} 
+              <button className={`page__link ${active__null2}`} 
               onClick={()=>{
               setstateUrl({
                 urlDetailTicket : ticket.next_page_url
               })
             }}>
-                <span>»</span>
+                <span>Next »</span>
               </button>
             </li>
           </ul>
@@ -162,9 +181,9 @@ export default function HistoryBooking(props) {
           <div className="tick__item row ">
             <div className="col-5">
               <b>Thông tin thanh toán</b>
-              <p>Phạm Minh Quý</p>
-              <p>23 Bàu Cát, Tân Bình, HCM</p>
-              <p>SĐT : 03298492304</p>
+              <p>Tên: {name}</p>
+              <p>Địa chỉ: {address}</p>
+              <p>SĐT: {phone_number}</p>
             </div>
             <div className="col-5">
               <b>Phương thức thanh toán</b>

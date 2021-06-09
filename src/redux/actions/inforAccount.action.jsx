@@ -97,13 +97,18 @@ export const updateInforFailed = (error) => {
     payload: error,
   };
 };
-export const updateInforAPI = () => {
+export const updateInforAPI = (userInfoUpdate) => {
   return async (dispatch) => {
     dispatch(updateInforRequest());
     try {
+      const user = JSON.parse(localStorage.getItem("userLogin"));
       const res = await axios({
-        method: "GET",
+        method: "POST",
         url: `https://cinemasummary.herokuapp.com/api/update_user`,
+        data : userInfoUpdate,
+        headers: {
+          Authorization: `Bearer ${user.access_token}`,
+        },
       });
       dispatch(updateInforSuccess(res.data));
     } catch (error) {

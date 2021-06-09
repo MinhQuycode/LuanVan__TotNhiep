@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import { NavLink, useHistory} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { connect } from "react-redux";
 import { actLogout } from "../../redux/actions/login.action";
 import { useDispatch} from "react-redux";
 import {getMovieSearchAPI} from "./../../redux/actions/searchMovie.action";
@@ -12,12 +11,10 @@ function Header(props) {
   const [state, setstate] = useState({nameMovie:''});
   const dispatch = useDispatch();
   const history = useHistory();
-
   const handleLogout = (event) => {
     event.preventDefault();
     dispatch(actLogout(event,history));
   };
-
   const handleChange = (event) =>{
     setstate({nameMovie : event.target.value});
   }
@@ -28,7 +25,6 @@ function Header(props) {
   }
 
   const { hash } = useLocation();
-  console.log(hash)
   const [isHashLink, setIsHashLink] = useState(false);
   useEffect(() => {
     if (hash.includes("#")) {
@@ -38,6 +34,7 @@ function Header(props) {
     }
   }, [hash]);
 
+  const user = JSON.parse(localStorage.getItem("userLogin"));
   return (
     <header>
       <nav className="navbar navbar--header navbar-expand-lg navbar-dark">
@@ -91,7 +88,7 @@ function Header(props) {
                 Ứng dụng
               </Link>
             </li>
-            {props.credential ? (
+            {user ? (
               <>
                 <li className="nav-item user__account">
                   <NavLink className="nav-link" style={{
@@ -102,7 +99,7 @@ function Header(props) {
                     textOverflow: "ellipsis",
                     color:'black'
                   }}  to="">
-                    Hi, {props.credential.name}
+                    Hi, {user.name}
                   </NavLink>
                   <NavLink className="account" to="/account">Tài khoản</NavLink>
                 </li>
@@ -170,10 +167,5 @@ function Header(props) {
     </header>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    credential: state.user.userSignin,
-  };
-};
 
-export default connect(mapStateToProps)(Header);
+export default Header;

@@ -33,7 +33,7 @@ export default function Account() {
             <div className="tab-content" id="nav-tabContent">
              <InfoAccount info={info}/>
              <ChangeAccount info={info}/>
-             <HistoryBooking/>
+             <HistoryBooking info={info}/>
             </div>
           </div>
         </div>

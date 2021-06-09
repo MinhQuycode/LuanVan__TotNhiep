@@ -1,6 +1,5 @@
 import {SEARCH_MOVIE_FAILED,SEARCH_MOVIE_SUCCESS,SEARCH_MOVIE_REQUEST} from "./../constants/searchMovie.constant";
 import axios from "axios";
-import Swal from 'sweetalert2';
 
 export const getMovieSearchSuccess = (movieItem) =>{
     return {
@@ -36,13 +35,6 @@ export const getMovieSearchAPI = (tenPhim,history) =>{
             dispatch(getMovieSearchSuccess(res.data));
         }catch (error) {
             dispatch(getMovieSearchFailed(error));
-            // history.push("/home");
-            return Swal.fire({
-                title: "Không có phim này !!!",
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 2000,
-              });
         }
     }
 }

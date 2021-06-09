@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import {useDispatch} from "react-redux";
+import Swal from 'sweetalert2';
+import { updateInforAPI } from "../../redux/actions/inforAccount.action";
 
 export default function ChangeAccount(props) {
+  const dispatch = useDispatch();
   const { name, email, phone_number, address, birthday, gender } = props.info;
   const [infoChange, setinfoChange] = useState({
     values: {
       name: "",
-      email: "",
       phone_number: "",
       address: "",
       birthday: "",
@@ -15,39 +18,31 @@ export default function ChangeAccount(props) {
       confirm_password: "",
     },
     errors: {
-      name: "",
-      email: "",
       phone_number: "",
-      address: "",
       birthday: "",
-      gender: "",
-      current_password: "",
       new_password: "",
       confirm_password: "",
     },
   });
   const handleChange = (event) => {
     const { name, value, type } = event.target;
-    // console.log(value);
     let newValue = { ...infoChange.values, [name]: value };
     let newError = { ...infoChange.errors };
 
     // check Password
-    if (name === "current_password") {
+    if (type === "password") {
       if (value.length >= 8) {
         newError[name] = "";
       } else {
         newError[name] = "*Mật khẩu có tối thiểu 8 ký tự !";
       }
     }
-    //check Email
-    if (type === "email") {
-      const regexEmail =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (!regexEmail.test(value)) {
-        newError[name] = "*Vui lòng nhập đúng email !";
+    //Ckeck comfirm
+    if(name === 'confirm_password'){
+      if(value === newValue['new_password']){
+        newError[name] = '';
       } else {
-        newError[name] = "";
+        newError[name] = '*Mật khẩu nhập lại chưa đúng !';
       }
     }
     //check SĐT
@@ -59,11 +54,56 @@ export default function ChangeAccount(props) {
         newError[name] = "";
       }
     }
+    //Check birthday
+    if(name === "birthday") {
+      const parternBirthday = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
+      if(!parternBirthday.test(value)){
+        newError[name] = "* VD: 04/03/1999";
+      } else {
+        newError[name]= "";
+      }
+    }
     setinfoChange ({
       values :newValue,
       errors :newError,
    });
   };
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    let {values,errors} = infoChange;
+    let valid = true;
+
+    for(const key in errors){
+      if(errors[key] !== ""){
+        valid = false;
+      }
+    }
+    if(!valid){
+      Swal.fire({
+        title: 'Lỗi!',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        text: 'Dữ liệu chưa hợp lệ !',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      return;
+    } else {
+      dispatch(updateInforAPI(infoChange.values));
+    }
+  }
+  //check checked
+  let checkNam;
+  gender === "nam" ? checkNam = true : checkNam = false;
+  let checkNu;
+  gender === "nu" ? checkNu = true : checkNu = false;
+  let checkKhac;
+  gender === "khac" ? checkKhac = true : checkKhac = false; 
   return (
     <div
       className="tab-pane fade"
@@ -72,7 +112,7 @@ export default function ChangeAccount(props) {
       aria-labelledby="list-profile-list"
     >
       <p className="tiltle__content">Thay đổi tài khoản</p>
-      <div className="changeAccount">
+      <form className="changeAccount" noValidate onSubmit={handleSubmit}>
         <div className="row row--change">
           <div className="col-4">
             <p>
@@ -84,27 +124,28 @@ export default function ChangeAccount(props) {
             <p>
               Email
             </p>
-            <input onChange={handleChange} type="email" name="email" placeholder={email}/>
+            <input onChange={handleChange} type="email" name="email" value={email}/>
             <p className="text text-danger">{infoChange.errors.email}</p>
           </div>
           <div className="col-4">
             <p>
               Địa chỉ
             </p>
-            <input onChange={handleChange} type="text" name="address" placeholder="Hồ Chí Minh"/>
+            <input onChange={handleChange} type="text" name="address" placeholder={address}/>
           </div>
           <div className="col-4">
             <p>
               Số điện thoại
             </p>
-            <input onChange={handleChange} name="phone_number" placeholder="0987654321"/>
+            <input onChange={handleChange} name="phone_number" placeholder={phone_number}/>
             <p className="text text-danger">{infoChange.errors.phone_number}</p>
           </div>
           <div className="col-4">
             <p>
               Ngày sinh
             </p>
-            <input onChange={handleChange} type="date" id="birthday" name="birthday" style={{color:"gray"}} />
+            <input onChange={handleChange}  name="birthday" placeholder={birthday}/>
+            <p className="text text-danger">{infoChange.errors.birthday}</p>
           </div>
           <div className="col-4">
             <p>
@@ -113,23 +154,29 @@ export default function ChangeAccount(props) {
             <div>
               <input
                 onChange={handleChange}
+                id="nam"
                 type="radio"
                 name="gender"
                 defaultValue="nam"
+                checked={checkNam}
               />
               <label className="mx-1">Nam</label>
               <input
                 onChange={handleChange}
+                id="nu"
                 type="radio"
                 name="gender"
                 defaultValue="nu"
+                checked={checkNu}
               />
               <label className="mx-1">Nữ</label>
               <input
                 onChange={handleChange}
+                id="khac"
                 type="radio"
                 name="gender"
                 defaultValue="khac"
+                checked={checkKhac}
               />
               <label className="mx-1">Khác</label>
             </div>
@@ -139,7 +186,6 @@ export default function ChangeAccount(props) {
               Mật khẩu cũ <b>*</b>
             </p>
             <input onChange={handleChange} type="password" name="current_password"/>
-            <p className="text text-danger">{infoChange.errors.current_password}</p>
           </div>
         </div>
         <div className="mt-3 ml-3">
@@ -148,26 +194,28 @@ export default function ChangeAccount(props) {
           >
             Bạn có muốn thay đổi mật khẩu ?
           </label>
-          <button className="btn__change" data-toggle="collapse" data-target="#change">Đổi</button>
+          <input className="btn__change" type="checkbox" data-toggle="collapse" data-target="#change" style={{cursor:"pointer"}}></input>
         </div>
         <div className="row collapse multi-collapse" id="change" >
           <div className="col-4">
             <p>
               Mật khẩu mới <b>*</b>
             </p>
-            <input type="password" name="new_password"/>
+            <input onChange={handleChange} type="password" name="new_password"/>
+            <p className="text text-danger">{infoChange.errors.new_password}</p>
           </div>
           <div className="col-4">
             <p>
               Nhập lại mật khẩu mới<b>*</b>
             </p>
-            <input type="password" name="confirm_password"/>
+            <input onChange={handleChange} type="password" name="confirm_password"/>
+            <p className="text text-danger">{infoChange.errors.confirm_password}</p>
           </div>
         </div>
         <div className="row mt-3 ml-2">
             <button className="btn__save" type="submit">Lưu lại</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

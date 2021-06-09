@@ -19,7 +19,6 @@ import {connect} from 'react-redux';
 import ErrorRgt from '../../Layouts/Error/ErrorRgt';
 import Loading from "./../../Layouts/Loading/Loading";
 
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -51,8 +50,6 @@ const [user,setUser] = useState({
       email :"",
       password :"",
       password_confirmation :""
-      // soDt : "",
-      
     },
     errors :{
       name :"",
@@ -61,9 +58,9 @@ const [user,setUser] = useState({
       password_confirmation :""
     }
 });
+console.log(user.values)
 const handleChange = (event) =>{
   let {value,name,type} = event.target;
-  //  console.log(value,name);
 
    let newValue = {...user.values,[name]:value}
    let newError = {...user.errors};
@@ -106,20 +103,17 @@ const handleChange = (event) =>{
 const handleSubmit = (event) =>{
   event.preventDefault();
   let {values,errors} = user;
-  //Biến form khi hợp lệ
   let valid = true;
-
   for (const key in values) {
-    if (values[key] === '') {
+    if (values[key] === "") {
       valid = false;
     }
   }
   for (const key in errors) {
-    if (errors[key] !== '') {
+    if (errors[key] !== "") {
       valid = false;
     }
   }
-  
   // console.log(props.message?.status);
   if(!valid){
     Swal.fire({
@@ -134,29 +128,12 @@ const handleSubmit = (event) =>{
       icon: 'error',
       confirmButtonText: 'Ok'
     })
-    return;
-  }else {
-      if(!props.message?.status === "fails"  && valid){
-        Swal.fire({
-          title: 'Thành công!',
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          },
-          text: 'Dữ liệu hợp lệ !',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        })
-         dispatch(signUpAPI(user.values,history));
-        history.push("/login");
+  }else{
+        dispatch(signUpAPI(user.values,history));
       }
   }
-};
 
-const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
-
+  const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
   if(props.loading) return (<Loading/>)
   return !userSignIn? (
     <Container component="main" maxWidth="xs">
@@ -183,7 +160,7 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
                 defaultValue={user.values.name}
                 onChange={handleChange}
               />
-              <span className="text text-danger">{user.errors.name}</span>
+              <span className="text text-danger font-weight-bold">{user.errors.name}</span>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -198,21 +175,8 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
                 defaultValue={user.values.email}
                 onChange={handleChange}
               />
-              <span className="text text-danger">{user.errors.email}</span>
+              <span className="text text-danger font-weight-bold">{user.errors.email}</span>
             </Grid>
-            {/* <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="soDt"
-                label="Số điện thoại"
-                name="soDt"
-                autoComplete="soDT"
-                onChange={handleChange}
-              />
-              <span className="text text-danger">{user.errors.soDt}</span>
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
@@ -226,7 +190,7 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
                 defaultValue={user.values.password}
                 onChange={handleChange}
               />
-              <span className="text text-danger">{user.errors.password}</span>
+              <span className="text text-danger font-weight-bold">{user.errors.password}</span>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -241,9 +205,8 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
                 defaultValue={user.values.password_confirmation}
                 onChange={handleChange}
               />
-              <span className="text text-danger">{user.errors.password_confirmation}</span>
+              <span className="text text-danger font-weight-bold">{user.errors.password_confirmation}</span>
             </Grid>
-            
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -277,7 +240,6 @@ const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
     <Redirect to="/"/>
   );
 }
-
 const mapStateToProps = (state) =>({
   error : state.userRegister.errors,
   loading : state.userRegister.loading,
