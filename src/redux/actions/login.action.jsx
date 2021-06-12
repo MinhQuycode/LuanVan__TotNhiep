@@ -28,7 +28,7 @@ export const signInAPI = (user,history,id) =>{
             const res = await axios ({
                 method :"POST",
                 // http://cinemasummary.herokuapp.com/api/booking
-                url:"http://cinemasummary.herokuapp.com/api/login",
+                url:"https://cinemasummary.herokuapp.com/api/login",
                 data : user,
             });
             //Gửi data lên store
