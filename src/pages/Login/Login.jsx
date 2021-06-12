@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function SignIn(props) {
   const classes = useStyles();
   const history = useHistory();
+  console.log(history);
   const dispatch = useDispatch();
   const [user,setUser] = useState({
       values :{
@@ -56,10 +57,7 @@ function SignIn(props) {
   });
  
   const handleChange = (event) =>{
-    //  let value = event.target.value;
-    //  let name = event.target.name;
     let {value,name,type} = event.target;
-    //  console.log(value,name);
 
      let newValue = {...user.values,[name]:value}
      let newError = {...user.errors};
@@ -84,7 +82,6 @@ function SignIn(props) {
      });
   };
   const handleSubmit = (event) =>{
-    // console.log(event)
     event.preventDefault();
     let {values,errors} = user;
     let valid = true;
@@ -115,7 +112,7 @@ function SignIn(props) {
         })
         return;
       }
-    dispatch(signInAPI(user.values,history));
+    dispatch(signInAPI(user.values,history,props.id));
   };
   if(props.loading) return (<Loading/>)
   return (
@@ -198,6 +195,7 @@ const mapStateToProps = (state) =>{
   return {
     loading : state.user.loading,
     error : state.user.error,
+    id : state.user.idLoginBooking
   }
 }
 

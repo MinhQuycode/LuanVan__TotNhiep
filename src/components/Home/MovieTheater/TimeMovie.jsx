@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getShowTimeAPI } from "../../../redux/actions/showtimes.action";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { redirectBookingPage } from "../../../redux/actions/login.action";
 
 function TimeMovie() {
   const history = useHistory();
@@ -14,22 +15,19 @@ function TimeMovie() {
 
   const dispatch = useDispatch();
 
-  const userSignIn = useSelector((state) => state.user.userSignin);
-
+  const userSignIn = JSON.parse(localStorage.getItem("userLogin"))
   const handleChoiceShowsTime = (id) => {
-    if (userSignIn?.access_token?.length > 0) {
+    dispatch(redirectBookingPage(id));
+    if (userSignIn) {
       history.push({ pathname: `/booking/${id}` });
     } else {
       history.push({ pathname: "/login" });
-      // if(userSignIn?.access_token?.length > 0){
-      //   history.push({ pathname: `/booking/${id}` });
-      // }
     }
   };
 
   useEffect(() => {
     dispatch(getShowTimeAPI());
-  }, [dispatch]);
+  }, []);
 
   const movie = useSelector((state) => state.movie.movieList);
 
@@ -127,6 +125,7 @@ function TimeMovie() {
       );
     });
   };
+
   return stateShowtime?.length > 0 ? (
     <div className="col-lg-6 col-md-12 lich__chieu">
       <div className="lich">{renderShowTimes()}</div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { SIGN_IN_REQUEST,SIGN_IN_SUCCESS,SIGN_IN_FAILED,LOG_OUT} from "../constants/login.constant";
+import { RESET_ID_BOOKING,SIGN_IN_REQUEST,SIGN_IN_SUCCESS,SIGN_IN_FAILED,LOG_OUT,LOGIN_BOOKING} from "../constants/login.constant";
 
 //Đăng nhập
 export const signInActionRequest = () =>{
@@ -21,20 +21,21 @@ export const signInActionFailed = (error) =>{
     }
 };
 
-export const signInAPI = (user,history) =>{
+export const signInAPI = (user,history,id) =>{
     return async(dispatch) =>{
         dispatch(signInActionRequest());
         try {
             const res = await axios ({
                 method :"POST",
-                url:"https://cinemasummary.herokuapp.com/api/login",
+                // http://cinemasummary.herokuapp.com/api/booking
+                url:"http://cinemasummary.herokuapp.com/api/login",
                 data : user,
             });
             //Gửi data lên store
             dispatch(signInActionSuccess(res.data));
             //Lưu trên localstrorage
             localStorage.setItem("userLogin",JSON.stringify(res.data));
-            history.goBack();
+            id ? history.push({pathname:`/booking/${id}`}) : history.goBack();
         } catch(error){
             dispatch(signInActionFailed(error));
         }
@@ -58,7 +59,7 @@ export const actLogout = (event,history) => {
         confirmButtonText: "Đăng xuất!",
         cancelButtonText: "Hủy",
       }).then((result) => {
-        // window.location.reload();
+        window.location.reload();
         if (result.value) {
           Swal.fire("Đã đăng xuất", "Thành công");
           dispatch({ type: LOG_OUT });
@@ -69,8 +70,19 @@ export const actLogout = (event,history) => {
       });
     };
   };
-
-
+//Redirect booking page 
+export const redirectBookingPage = (idBooking) =>{
+  return {
+      type : LOGIN_BOOKING,
+      payload : idBooking,
+  }
+};
+export const resetIdBooking = () =>{
+  return{
+    type : RESET_ID_BOOKING,
+    payload : null,
+  }
+}
 
 
 

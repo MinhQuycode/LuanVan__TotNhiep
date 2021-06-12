@@ -61,16 +61,16 @@ windowDimensions.width <= 815 ?  col = "col-12" : col = "col-6";
           <h2 className="info__tiltle">Thông tin phim</h2>
           <h5>{props.infor?.name}</h5>
           <p>
-            <span>Mô tả :</span> {props.infor?.content}{" "}
+            <span>Mô tả :</span> {!props.infor?.content ? "Chưa có mô tả chi tiết, chúng tôi đang cập nhật !": `${props.infor?.content}`}
           </p>
           <p>
             <span>Đạo diễn :</span> {props.infor?.actors}
           </p>
           <p>
-            <span>Thể loại :</span> {props.infor?.type === "" ? "Lãng mạn": `${props.infor?.type}` } 
+            <span>Thể loại :</span> {!props.infor?.type ? "Lãng mạn": `${props.infor?.type}` } 
           </p>
           <p>
-            <span>Diễn viên :</span> {props.infor?.directors === "" ? "Trấn Thành" : `${props.infor?.directors}` } 
+            <span>Diễn viên :</span> {!props.infor?.director ? "Trấn Thành" : `${props.infor?.directors}` } 
           </p>
           <p>
             <span>Ngày khởi chiếu :</span> {props.infor?.release_date}

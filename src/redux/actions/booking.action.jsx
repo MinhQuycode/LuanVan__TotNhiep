@@ -72,7 +72,7 @@ export const bookingTicketAPI = (maLichChieu,totalAmount,quantity, danhSachVe,us
       try {
         const res = await axios({
           method: "POST",
-          url: "http://cinemasummary.herokuapp.com/api/booking",
+          url: "https://cinemasummary.herokuapp.com/api/booking",
           data: {
             maLichChieu,   
             totalAmount,

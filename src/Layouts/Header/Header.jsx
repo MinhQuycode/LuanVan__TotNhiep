@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { NavLink, useHistory} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { actLogout } from "../../redux/actions/login.action";
+import { actLogout, resetIdBooking } from "../../redux/actions/login.action";
 import { useDispatch} from "react-redux";
 import {getMovieSearchAPI} from "./../../redux/actions/searchMovie.action";
 import { useLocation } from "react-router-dom";
@@ -120,6 +120,9 @@ function Header(props) {
                     style={{color:"black"}}
                     className="nav-link handle"
                     to="/login"
+                    onClick={()=>{
+                      dispatch(resetIdBooking())
+                    }}
                   >
                     Đăng nhập
                   </NavLink>

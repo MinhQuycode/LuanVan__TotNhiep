@@ -7,7 +7,9 @@ import {
   GET_INFOR_DETAIL_TICKET_FAILED,
   UPDATE_INFOR_REQUEST,
   UPDATE_INFOR_SUCCESS,
-  UPDATE_INFOR_FAILED
+  UPDATE_INFOR_FAILED,
+  CHANGE_ACTIVE,
+  RESET_UPDATE
 } from "./../constants/inforAccount.constant";
 import axios from "axios";
 
@@ -114,5 +116,16 @@ export const updateInforAPI = (userInfoUpdate) => {
     } catch (error) {
       dispatch(updateInforFailed(error));
     }
+  };
+};
+// change class active
+export const changeClassActive = () => {
+  return {
+    type: CHANGE_ACTIVE,
+  };
+};
+export const resetUpdate = () => {
+  return {
+    type: RESET_UPDATE,
   };
 };

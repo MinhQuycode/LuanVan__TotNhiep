@@ -1,12 +1,13 @@
 import {
     UPDATE_INFOR_REQUEST,
     UPDATE_INFOR_SUCCESS,
-    UPDATE_INFOR_FAILED
+    UPDATE_INFOR_FAILED,
+    RESET_UPDATE
   } from "../constants/inforAccount.constant";
 
 const initialState = {
     loading: null,
-    update : [],
+    update : null,
     error: null,
 }
 const updateInfoReducer =  (state = initialState,action) => {
@@ -29,7 +30,10 @@ const updateInfoReducer =  (state = initialState,action) => {
             state.update = [];
             state.error = payload;
             return { ...state };
-
+          case RESET_UPDATE:
+            let newER = null 
+            state.error = newER;
+            return {...state}
     default:
         return state
     }

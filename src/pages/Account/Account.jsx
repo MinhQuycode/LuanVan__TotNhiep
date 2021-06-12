@@ -4,8 +4,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import ScrollToTop from "./../../Layouts/ScrollToTop/ScrollToTop";
 import Loading from "./../../Layouts/Loading/Loading";
 import { getInforAccountAPI } from "./../../redux/actions/inforAccount.action";
-import { getInforDetailTicketAPI } from "./../../redux/actions/inforAccount.action";
-import ListTab from "./ListTab";
 import InfoAccount from "./InfoAccount";
 import ChangeAccount from "./ChangeAccount";
 import HistoryBooking from "./HistoryBooking";
@@ -28,7 +26,41 @@ export default function Account() {
       <ScrollToTop />
       <div className="container">
         <div className="account--user row">
-         <ListTab/>
+        <div className="col-3 tiltle__user">
+            <div className="list-group" id="list-tab" role="tablist">
+              <span className="tiltle">TÀI KHOẢN CỦA BẠN</span>
+              <a
+                className={`list-group-item list-group-item-action active`}
+                id="list-home-list"
+                data-toggle="list"
+                href="#list-home"
+                role="tab"
+                aria-controls="home"
+              >
+                Thông tin chung
+              </a>
+              <a
+                className={`list-group-item list-group-item-action `}
+                id="list-profile-list"
+                data-toggle="list"
+                href="#list-profile"
+                role="tab"
+                aria-controls="profile"
+              >
+                Chi tiết tài khoản
+              </a>
+              <a
+                className="list-group-item list-group-item-action"
+                id="list-messages-list"
+                data-toggle="list"
+                href="#list-messages"
+                role="tab"
+                aria-controls="messages"
+              >
+                Lịch sử giao dịch
+              </a>
+            </div>
+          </div>
           <div className="col-9 tiltle__contents">
             <div className="tab-content" id="nav-tabContent">
              <InfoAccount info={info}/>

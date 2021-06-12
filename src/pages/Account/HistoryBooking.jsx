@@ -1,13 +1,14 @@
 import React, { useState,useEffect } from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {getInforDetailTicketAPI} from "./../../redux/actions/inforAccount.action";
+import LoadingUpdate from "./LoadingUpdate";
 
 export default function HistoryBooking(props) {
   const ticket = useSelector((state) => state.ticket.ticket);
-  console.log(ticket)
   const dispatch = useDispatch();
   const info = useSelector((state) => state.account.account);
   const { name, phone_number, address} = props.info;
+  const loading = useSelector((state) => state.ticket.loading);
   const [state, setState] = useState({
     display1: "",
     display2: "d-none",
@@ -101,7 +102,7 @@ export default function HistoryBooking(props) {
     return(
       arrIndex.map((item,index)=>{
         return(
-          <button value={item} className={`page__link ${item === ticket.current_page ? "active":""}`} key={index}
+          <button value={item} className={`page__link ${ticket.last_page === 1 ? "d-none":""} ${item === ticket.current_page ? "active":""}`} key={index}
           onClick={()=>{
             setstateUrl({
               urlDetailTicket : `https://cinemasummary.herokuapp.com/api/list-ticket/${info.id}?page=${item}`
@@ -130,6 +131,7 @@ export default function HistoryBooking(props) {
     >
       <div className={`history ${state.display1}`}>
         <p className="tiltle__content">Lịch sử giao dịch</p>
+        {loading ? (<LoadingUpdate/>):(
         <table className="table table-striped">
           <thead>
             <tr>
@@ -144,6 +146,7 @@ export default function HistoryBooking(props) {
           </thead>
           {listTicketUser()}
         </table>
+        )}
         <nav className="navigation">
           <ul className="navigation__ticket">
             <li className="page__item">
