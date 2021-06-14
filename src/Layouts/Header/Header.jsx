@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { NavLink, useHistory} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { actLogout, resetIdBooking } from "../../redux/actions/login.action";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {getMovieSearchAPI} from "./../../redux/actions/searchMovie.action";
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
@@ -33,8 +33,8 @@ function Header(props) {
       setIsHashLink(false);
     }
   }, [hash]);
-
-  const user = JSON.parse(localStorage.getItem("userLogin"));
+  const user = useSelector(state => state.account.account)
+  const user1 = JSON.parse(localStorage.getItem("userLogin"));
   return (
     <header>
       <nav className="navbar navbar--header navbar-expand-lg navbar-dark">
@@ -88,7 +88,7 @@ function Header(props) {
                 Ứng dụng
               </Link>
             </li>
-            {user ? (
+            {user1 ? (
               <>
                 <li className="nav-item user__account">
                   <NavLink className="nav-link" style={{

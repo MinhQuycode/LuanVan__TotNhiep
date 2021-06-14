@@ -1,15 +1,16 @@
-import { SIGN_UP_REQUEST,SIGN_UP_FAILED,SIGN_UP_SUCCESS } from "../constants/register.constant";
+import { SIGN_UP_REQUEST,SIGN_UP_FAILED,SIGN_UP_SUCCESS,RESET_SIGN_UP} from "../constants/register.constant";
 import axios from 'axios';
+
 
 export const signUpActionRequest = () =>{
     return {
         type : SIGN_UP_REQUEST,
     }
 };
-export const signUpActionSuccess = (user) =>{
+export const signUpActionSuccess = (data) =>{
     return {
         type : SIGN_UP_SUCCESS,
-        payload : user
+        payload : data
     }
 };
 export const signUpActionFailed = (error) =>{
@@ -18,6 +19,13 @@ export const signUpActionFailed = (error) =>{
         payload : error
     }
 };
+
+export const resetResponse = () =>{
+    return {
+        type : RESET_SIGN_UP,
+    }
+};
+
 //Đăng ký
 
 export const signUpAPI = (user,history) =>{
@@ -29,10 +37,9 @@ export const signUpAPI = (user,history) =>{
                 url:"https://cinemasummary.herokuapp.com/api/register",
                 data : user,
             });
-            dispatch(signUpActionSuccess(res));
-            // history.push("/login");
+                dispatch(signUpActionSuccess(res.data));
         } catch(error){
             dispatch(signUpActionFailed(error));
-        }
-    }
+           
+    }}
 }

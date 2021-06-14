@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { NavLink, Redirect } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import { signUpAPI } from '../../redux/actions/register.action';
+import { resetResponse, signUpAPI } from '../../redux/actions/register.action';
 import Swal from 'sweetalert2';
 import {useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -58,7 +58,6 @@ const [user,setUser] = useState({
       password_confirmation :""
     }
 });
-console.log(user.values)
 const handleChange = (event) =>{
   let {value,name,type} = event.target;
 
@@ -114,7 +113,6 @@ const handleSubmit = (event) =>{
       valid = false;
     }
   }
-  // console.log(props.message?.status);
   if(!valid){
     Swal.fire({
       title: 'Lỗi!',
@@ -132,7 +130,28 @@ const handleSubmit = (event) =>{
         dispatch(signUpAPI(user.values,history));
       }
   }
-
+  if(props.message?.status === "success"){
+  Swal.fire({
+    title: 'Thành công !',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    },
+    text: 'Đăng ký thành công !',
+    icon: 'success',
+    confirmButtonText: 'Ok'
+  }).then((result)=>{
+    if(result.value){
+        history.push("/login")
+        dispatch(resetResponse());
+    }else{
+        history.push("/login")
+        dispatch(resetResponse());
+      }
+  })
+}
   const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
   if(props.loading) return (<Loading/>)
   return !userSignIn? (
@@ -213,7 +232,7 @@ const handleSubmit = (event) =>{
                 label="Tôi muốn nhận thông báo mới nhất !"
                 checked
               />
-              {props.message?.data && <ErrorRgt message={props.message?.data}/>}
+              {props.message && <ErrorRgt message={props.message}/>}
             </Grid>
           </Grid>
           <Button

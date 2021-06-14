@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import {getMovieListAPI } from "./../../redux/actions/movie.action";
 import ScrollToTop from '../../Layouts/ScrollToTop/ScrollToTop';
 import Loading from '../../Layouts/Loading/Loading';
+import { getInforAccountAPI } from "../../redux/actions/inforAccount.action";
 import Notfound from '../PageNotFound/Notfound';
 
 export default function Detail(props) {
@@ -15,6 +16,9 @@ export default function Detail(props) {
     useEffect(() => {
         dispatch(getMovieListAPI());        
     },[]);
+    useEffect(() => {
+        dispatch(getInforAccountAPI()); 
+      },[]);
     const inforMovie = useSelector(state => state.movie.movieList);
     const loading = useSelector(state => state.movie.loading);
     let movie = inforMovie?.find(movieItem => movieItem.id == idMovie);

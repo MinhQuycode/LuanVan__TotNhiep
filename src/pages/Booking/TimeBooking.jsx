@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 export default function TimeBooking(props) {
     const history = useHistory();
+    const stateStop = useSelector(state => state.chair.stopTimeBooking)
     const clockRef = useRef();
     const {controlled} = props;
-    console.log(controlled);
     const handlePause = () => clockRef.current.pause(controlled);
     const renderer = ({ minutes, seconds, completed}) => {
         if (completed) {
@@ -43,13 +43,16 @@ export default function TimeBooking(props) {
           }
         });
       };
+      let dPlay = stateStop;
     return (
-            <div className="col-6 time__booking text-right">
+            <div className="col-5 time__booking text-right">
               <p>Thời gian giữ ghế</p>
-              <Countdown date={Date.now() + 150000} renderer={renderer} onComplete={handleCompleted} ref={clockRef}/>
-              {/* <button className="btn btn-infor" onClick={()=>{
-                {handlePause()}
-              }}>Pause</button> */}
+              <div className={`${dPlay}`}>
+                  <Countdown date={Date.now() + 180000} renderer={renderer} onComplete={handleCompleted} ref={clockRef}/>
+              </div>
+              <div className={`${dPlay==="d-none" ? "d-block" : "d-none"}`}>
+                  <span style={{color:"red",fontSize:"30px",paddingRight:"2rem"}}>00:00</span>
+              </div>
             </div>
     )
 }

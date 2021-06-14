@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,6 +20,7 @@ import Error from '../../Layouts/Error/Error';
 import ScrollToTop from "../../Layouts/ScrollToTop/ScrollToTop";
 import Swal from 'sweetalert2';
 import Loading from './../../Layouts/Loading/Loading'
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -141,7 +142,7 @@ function SignIn(props) {
             onChange={handleChange}
             value ={user.values.email}
           />
-          <span className="text text-danger">{user.errors.email}</span>
+          <span className="text text-danger font-weight-bold">{user.errors.email}</span>
           <TextField
             variant="outlined"
             margin="normal"
@@ -155,7 +156,7 @@ function SignIn(props) {
             onChange={handleChange}
             value ={user.values.password}
           />
-          <span className="text text-danger">{user.errors.password}</span> <br/>
+          <span className="text text-danger font-weight-bold">{user.errors.password}</span> <br/>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

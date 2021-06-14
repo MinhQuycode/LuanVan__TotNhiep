@@ -69,7 +69,7 @@ export default function Booking(props) {
       <div className="row">
         <div className="col-lg-8 col-md-12">
           <div className="row infor__movie">
-            <div className="col-6 info__movie">
+            <div className="col-7 info__movie">
               <img className="imgMovie" src={inforBK?.hinhAnh} alt="anh"/>
               <div className="infor">
                 <p>{inforBK?.tenPhim}</p>

@@ -33,7 +33,7 @@ export default function InfoAccount(props) {
           <p>Email : {email}</p>
           <p>SĐT : {!phone_number ? "Bạn có thể thêm vào !" : phone_number}</p>
           <p>Địa chỉ : {!address ? "Bạn có thể thêm vào !" : address}</p>
-          <p>Ngày sinh :{birthday?.substring(8,11)}-{birthday?.substring(5,8)}{birthday?.substring(0,4)}</p>
+          <p>Ngày sinh :{!birthday ? "Bạn có thể thêm vào" : birthday?.substring(8,11)}-{birthday?.substring(5,8)}{birthday?.substring(0,4)}</p>
           {/* <button
             className="btn__info"
             onClick={() => {

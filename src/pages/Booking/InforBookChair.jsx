@@ -16,9 +16,11 @@ export default function InforBookChair(props) {
   // Mã lịch chiếu
   const { id } = useParams();
   const maLichChieu = id;
-  
+
   // Lấy Id user
   const user_id = useSelector(state => state.account.account.id);
+  const user_name = useSelector(state => state.account.account.name);
+  const user_email = useSelector(state => state.account.account.email);
   useEffect(() => {
     dispatch(getInforAccountAPI())
   },[])
@@ -69,7 +71,8 @@ export default function InforBookChair(props) {
       cancelButtonText: "Hủy",
     }).then((result)=>{
       if(result.value){
-         dispatch(bookingTicketAPI(maLichChieu,totalAmount,quantity,danhSachVe,user_id));
+         dispatch(bookingTicketAPI(maLichChieu,totalAmount,quantity,danhSachVe,user_id,user_email,user_name));
+         dispatch(stopTimeBooking());
       }
     })
 }
@@ -96,7 +99,7 @@ useEffect(() => {
     })
   }else if(resMessage === "success"){
     Swal.fire({
-      title: `Đặt vé thành công`,
+      title: `Đặt vé thành công, bạn có thể kiểm tra email của mình !`,
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
       },

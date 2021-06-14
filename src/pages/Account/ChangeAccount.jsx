@@ -29,7 +29,7 @@ export default function ChangeAccount(props) {
       confirm_password: "",
     },
   });
-
+  console.log(infoChange.values)
   const handleChange = (event) => {
     const { name, value, type } = event.target;
     let newValue = { ...infoChange.values, [name]: value };
@@ -39,9 +39,12 @@ export default function ChangeAccount(props) {
     if(name === "new_password"){
       const parterPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
       if(!parterPass.test(value)){
-        newError[name] = "Mật khẩu có 8 ký tự, 1 số, 1 chữ hoa và 1 chữ thường !"
+        newError[name] = "Mật khẩu ít nhất 8 ký tự, 1 số, 1 chữ hoa và 1 thường!"
       } else{
         newError[name]= "";
+      }
+      if(value ===""){
+        newError[name] = "";
       }
     }
     //Ckeck comfirm
@@ -57,10 +60,14 @@ export default function ChangeAccount(props) {
       const parternSodt = /((09|03|07|08|05)+([0-9]{8})\b)/;
       if (!parternSodt.test(value)) {
         newError[name] = "* VD: 0364567890";
-      } else {
+      }else {
+        newError[name] = '';
+      }
+      if(value ===""){
         newError[name] = "";
       }
     }
+    
     // Check birthday
     // if(name === "birthday") {
     //   const parternBirthday = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
@@ -103,6 +110,7 @@ export default function ChangeAccount(props) {
       dispatch(updateInforAPI(infoChange.values));
     }
   }
+
   if(success?.status === "success"){
       Swal.fire({
         title: 'Thành công !',
@@ -142,6 +150,7 @@ export default function ChangeAccount(props) {
       }
     })
   }
+  const stringBirthday = `${birthday?.substring(8, 11) +birthday?.substring(4, 8) +birthday?.substring(0, 4)}`
   return (
     <div
       className={`tab-pane fade`}
@@ -195,7 +204,7 @@ export default function ChangeAccount(props) {
             <input
               onChange={handleChange}
               name="birthday"
-              placeholder={`${birthday?.substring(8, 11) +birthday?.substring(4, 8) +birthday?.substring(0, 4)}`}
+              placeholder={!birthday ? "": stringBirthday}
             />
             <p className="text text-danger">{infoChange.errors.birthday}</p>
           </div>
@@ -243,7 +252,7 @@ export default function ChangeAccount(props) {
               type="password"
               name="new_password"
             />
-            <p className="text text-danger">{infoChange.errors.new_password}</p>
+            <p className="text text-danger mr-5">{infoChange.errors.new_password}</p>
           </div>
           <div className="col-4">
             <p>

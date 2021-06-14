@@ -185,8 +185,8 @@ export default function HistoryBooking(props) {
             <div className="col-5">
               <b>Thông tin thanh toán</b>
               <p>Tên: {name}</p>
-              <p>Địa chỉ: {address}</p>
-              <p>SĐT: {phone_number}</p>
+              <p>Địa chỉ: {address ? address : "Bạn có thể thêm vào !"}</p>
+              <p>SĐT: {phone_number ? phone_number : "Bạn có thể thêm vào !"}</p>
             </div>
             <div className="col-5">
               <b>Phương thức thanh toán</b>

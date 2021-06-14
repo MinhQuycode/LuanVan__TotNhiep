@@ -1,8 +1,8 @@
-import { SIGN_UP_REQUEST,SIGN_UP_FAILED,SIGN_UP_SUCCESS } from "../constants/register.constant";
+import { SIGN_UP_REQUEST,SIGN_UP_FAILED,SIGN_UP_SUCCESS,RESET_SIGN_UP} from "../constants/register.constant";
 
 const initialState = {
     loading :false,
-    userRegister : null,
+    userRegister : [],
     error :null
 }
 
@@ -24,9 +24,11 @@ const registerReducer = (state = initialState,action) => {
     case SIGN_UP_FAILED:
         state.loading = false;
         state.userRegister = null;
-        state.error = payload;
+        state.error = [];
         return {...state};
-
+    case RESET_SIGN_UP:
+        state.userRegister = null;
+        return {...state}
     default:
         return state
     }
