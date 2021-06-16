@@ -95,6 +95,7 @@ useEffect(() => {
          window.location.reload();
       }else{
           history.push({ pathname: `/home` });
+          dispatch(resetReducerChair())
       }
     })
   }else if(resMessage === "success"){

@@ -9,15 +9,14 @@
         border-radius: 100%;
         position: absolute;
         left: 47.6%;
-        top: 50%;
+        top: 48%;
         transition: all 1s;
-    }
-    &:hover{
-        .btn__trailer{
-            transform: scale(1.2);
-            
+        width: 45px;
+        &:hover{
+                transform: scale(1.2);
         }
     }
+    
     .modal-video{
         position: absolute !important;
         top:4% !important;
