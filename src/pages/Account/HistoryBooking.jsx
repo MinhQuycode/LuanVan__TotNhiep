@@ -73,6 +73,10 @@ export default function HistoryBooking(props) {
 
   //Detail
   let bookingCode = ticketItem?.map((item) => item.MaBooking);
+  let ngayDat = ticketItem?.map((item)=>item.NgayDatVe);
+  let stringDay = JSON.stringify(ngayDat);
+
+
   const listTicketUserDetail = () => {
     return ticketItem?.map((ticket, index) => {
       return (
@@ -179,7 +183,7 @@ export default function HistoryBooking(props) {
         <p className="tiltle__content">Mã đặt vé - #{bookingCode}</p>
         <div className="detail_tick">
           <p className="content__tick">
-            Ngày mua hàng : Ngày 22 tháng 5 năm 2021
+            Ngày mua hàng : Ngày {stringDay?.substring(10,12)} tháng {stringDay?.substring(7,9)} năm {stringDay?.substring(2,6)}
           </p>
           <div className="tick__item row ">
             <div className="col-5">

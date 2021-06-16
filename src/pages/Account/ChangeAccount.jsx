@@ -29,7 +29,6 @@ export default function ChangeAccount(props) {
       confirm_password: "",
     },
   });
-  console.log(infoChange.values)
   const handleChange = (event) => {
     const { name, value, type } = event.target;
     let newValue = { ...infoChange.values, [name]: value };
