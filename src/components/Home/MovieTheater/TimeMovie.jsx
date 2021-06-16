@@ -60,14 +60,13 @@ function TimeMovie() {
     return arrTimeMovie;
   };
   let arrayTimeMovie = TimOfMovie();
-
   const renderShowTimes = () => {
     return movieTheater?.map((showTime, index) => {
       return (
         <div key={index} className="chieu">
           {movie
             ?.filter((item) => item.id === showTime)
-            .map((img, index) => {
+            .map((img, index) =>{
               return (
                 <div className="row" key={index}>
                   <div className="col-4">
@@ -119,19 +118,22 @@ function TimeMovie() {
                   </div>
                   </div>
                 </div>
-              );
+              )
             })}
         </div>
       );
     });
   };
-
-  return stateShowtime?.length > 0 ? (
+  return (
     <div className="col-lg-6 col-md-12 lich__chieu">
-      <div className="lich">{renderShowTimes()}</div>
+         {movieTheater?.length === 0 ? (
+         <div className="lich">
+           <p style={{color:"orangered",fontSize:20}}>
+             Chưa có lịch chiếu cho rạp này !
+           </p>
+         </div>):(<div className="lich">{renderShowTimes()}</div>)}
     </div>
-  ) : (
-    <div></div>
-  );
+
+  ) 
 }
 export default React.memo(TimeMovie);

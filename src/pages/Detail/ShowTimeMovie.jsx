@@ -11,7 +11,6 @@ import { getShowTimeAPI } from "./../../redux/actions/showtimes.action";
 import { getTheaterListAPI } from "../../redux/actions/theater.action";
 import { getCinemasListAPI } from "../../redux/actions/cinemas.action";
 import { redirectBookingPage } from "../../redux/actions/login.action";
-// import LinkButton from "./../../components/Home/LinkButton/LinkButton";
 
 function ShowTimeMovie(props) {
   const history = useHistory();
@@ -104,8 +103,7 @@ function ShowTimeMovie(props) {
   let dateShows = date?.filter((item, i, ar) => ar.indexOf(item) === i);
   let arrDate = [];
   let itemDate = dateShows?.map((item) => item.substring(5, 10));
-  arrDate.push(itemDate);
-
+  arrDate.push(itemDate?.sort());
   useEffect(() => {
     if (itemDate) {
       dispatch(postDateReducer(itemDate[0]));
@@ -184,10 +182,13 @@ function ShowTimeMovie(props) {
   windowDimensions.width <= 845 ? (col2 = "col-12") : (col2 = "col-8");
 
   // const render
+  console.log(showTimesMovie)
   return (
-    <div className="row showsTime">
-      <div className={`${col1} showTheater`}>{renderTheater()}</div>
-      <div className={`${col2} showTime`}>
+    <div className="showsTime">
+      {showTimesMovie?.length === 0 ? (<span style={{color:"orangered",fontSize:20}}>Chưa có lịch chiếu cho phim này !</span>):(
+      <div className="row">
+        <div className={`${col1} showTheater`}>{renderTheater()}</div>
+        <div className={`${col2} showTime`}>
         <div className="row day">
           {arrDate?.map((date) => {
             return date?.map((item, index) => {
@@ -238,13 +239,6 @@ function ShowTimeMovie(props) {
                               )
                               .map((time, index) => {
                                 return (
-                                  // <LinkButton
-                                  //   key={index}
-                                  //   to={`/booking/${time.id}`}
-                                  //   className="btn btn--time mr-2 mb-2"
-                                  // >
-                                  //   <b>{time.time}</b>
-                                  // </LinkButton>
                                     <button key={index}
                                     className={`btn--time mr-2 mb-2`}
                                     onClick={() => {
@@ -264,6 +258,8 @@ function ShowTimeMovie(props) {
           </div>
         </div>
       </div>
+      </div>
+      )}
     </div>
   );
 }
