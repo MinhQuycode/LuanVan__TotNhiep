@@ -92,3 +92,26 @@
         }
     
 }
+@include respond-to('small') {
+    .movieItem{ 
+        height: auto;
+    .movieItem__img{
+        .img__link{
+            .img__movie{
+                width: 100%;
+                height: 200px !important;
+            }
+        }
+    }
+    .showing__head{
+        background-color: orangered;
+        padding: 5px;
+        border-radius: 4px;
+        color: white;
+        .showing__age,
+        .showing__point{
+            display: none;
+        }
+    }
+}
+}

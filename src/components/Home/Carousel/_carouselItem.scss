@@ -23,3 +23,13 @@
        
    }
 }
+
+@include respond-to('small') {
+    button.slick-arrow.slick-next,
+    button.slick-arrow.slick-prev{
+     display: none !important;
+    }
+    ul.slick-dots{
+        display: none !important;
+    }
+}

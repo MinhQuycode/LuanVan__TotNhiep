@@ -39,7 +39,7 @@ export default function InforBookChair(props) {
       )
   }
   //Tổng tiền okee
-  let totalAmount = tongTien();
+  let totalAmount = parseInt(tongTien());
   //Danh sach vé
   const danhSachVe = chairBooking.map((ve) => (
     {

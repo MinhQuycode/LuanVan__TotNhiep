@@ -63,4 +63,22 @@
       }
     }
   }
+  @include respond-to('large'){
+    .footer__item__4 {
+        .text-right {
+            text-align: center !important;
+            ul{
+                flex-direction: column;
+                li {
+                    a {
+                        border: none !important;
+                    }
+                    span{
+                        border: none !important;
+                    }
+                }
+            }
+        }
+    }
+  }
 }

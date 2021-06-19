@@ -9,21 +9,19 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background-color: $color-white-0;
-  color: $color-black-0;
-  line-height: $line-height-default;
-  font-size: $fs-14;
+  background-color: white;
+  color: black;
+  font-size: 14px;
   font-weight: 400;
   font-family: Arial;
 }
 
 a,
 a:hover {
-  color: $color-black-1;
   text-decoration: none;
 }
 img {
-  border-radius: $border-radius;
+  border-radius: 4px;
   max-width: 100%;
   display: block;
 }

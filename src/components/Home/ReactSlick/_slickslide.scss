@@ -1,53 +1,63 @@
-#slide__movie{
-    .title{
-        margin-bottom: 1rem;
-        height: 100px;
-        .nav-item{
-                .nav-link{
-                    margin: 3.5rem 2rem 0 2rem ;
-                    font-size: 25px;
-                    transition: all 0.25s;
-                    background: none !important;
-                    border-radius: unset;
-                    color: black;
-                    cursor: unset;
-                    
-                }
-            }
-}
-.slideMovie__item{
+#slide__movie {
+  .title {
+    margin-bottom: 1rem;
+    height: 100px;
+    .nav-item {
+      .nav-link {
+        margin: 3.5rem 2rem 0 2rem;
+        font-size: 25px;
+        transition: all 0.25s;
+        background: none !important;
+        border-radius: unset;
+        color: black;
+        cursor: unset;
+      }
+    }
+  }
+  .slideMovie__item {
     width: 81%;
     margin: 0 auto;
-}
+  }
 
-    button.slick-arrow.slick-next{
-        border: none;
-        width: 36px;
-        border-radius: 50%;
-        height: 34px;
-        overflow: hidden;
-        background-color: orangered;
-        position: absolute;
-        right: -45px;
-        z-index: 4;
-        top: 45%;
-        &:before{
-            font-size: 40px !important;
-        }
+  button.slick-arrow.slick-next {
+    border: none;
+    width: 36px;
+    border-radius: 50%;
+    height: 34px;
+    overflow: hidden;
+    background-color: orangered;
+    position: absolute;
+    right: -45px;
+    z-index: 4;
+    top: 45%;
+    &:before {
+      font-size: 40px !important;
     }
-    button.slick-arrow.slick-prev{
-        border: none;
-        width: 36px;
-        border-radius: 50%;
-        height: 34px;
-        overflow: hidden;
-        background-color: orangered;
-        position: absolute;
-        left: -45px;
-        z-index: 4;
-        top: 45%;
-        &:before{
-            font-size: 40px !important;
-        }
+  }
+  button.slick-arrow.slick-prev {
+    border: none;
+    width: 36px;
+    border-radius: 50%;
+    height: 34px;
+    overflow: hidden;
+    background-color: orangered;
+    position: absolute;
+    left: -45px;
+    z-index: 4;
+    top: 45%;
+    &:before {
+      font-size: 40px !important;
     }
+  }
+}
+@include respond-to("large") {
+  #slide__movie {
+    .title {
+      .nav-item {
+        .nav-link {
+          font-size: 20px;
+        }
+      }
+    }
+  }
 }

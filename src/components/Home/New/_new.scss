@@ -21,8 +21,9 @@
                     font-size: 24px;
                     transition: all 0.25s;
                     background-color: transparent;
+                    color: black;
                     &:hover{
-                        transform: scale(1.2);
+                        transform: scale(1.1);
                     }
                 }
             }
@@ -119,10 +120,9 @@
             display: none;
         }
     }
-@media screen and (max-width:530px){
-        .news__navigation a{
-            font-size: 16px;
+    @include respond-to('large') {
+        .my__news .news__navigation a{
+            font-size: 20px;
         }
     }
-}
-}
+}}

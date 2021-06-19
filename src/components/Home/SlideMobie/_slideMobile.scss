@@ -63,4 +63,11 @@
       margin: 0 auto;
     }
 }
+@include respond-to('small') {
+  .ungdung__mobile{
+    .title_ungdung {
+        font-size: 1.2rem !important;
+    }
+}
+}
 }

@@ -27,3 +27,8 @@
         }
     }
 }
+@include respond-to('small') {
+    .btn__trailer{
+        display: none;
+    }
+}
