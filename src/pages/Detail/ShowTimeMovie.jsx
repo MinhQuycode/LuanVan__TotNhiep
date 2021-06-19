@@ -182,7 +182,6 @@ function ShowTimeMovie(props) {
   windowDimensions.width <= 845 ? (col2 = "col-12") : (col2 = "col-8");
 
   // const render
-  console.log(showTimesMovie)
   return (
     <div className="showsTime">
       {showTimesMovie?.length === 0 ? (<span style={{color:"orangered",fontSize:20}}>Chưa có lịch chiếu cho phim này !</span>):(

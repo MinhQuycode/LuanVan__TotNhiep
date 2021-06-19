@@ -1,8 +1,10 @@
 import React, {useState,useEffect } from 'react'
-import ReactPlayer from 'react-player';
+import ModalVideo from 'react-modal-video';
 
 export default function InforMovie(props) {
   //Lấy kích thước màn h
+  const [isOpen, setOpen] = useState(false);
+
   const hasWindow = typeof window !== 'undefined';
 
   const getWindowDimensions = () => {
@@ -23,13 +25,13 @@ export default function InforMovie(props) {
       return () => window.removeEventListener('resize', handleResize);
     }
   }, [hasWindow]);
-// console.log(windowDimensions);
 
 let col = "col-6";
 windowDimensions.width <= 815 ?  col = "col-12" : col = "col-6";
-
+let trailer = `${props.infor?.trailer.slice(32)}`
     return (
       <div className="row detail__trailer">
+        <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={trailer} onClose={() => setOpen(false)} />
         <div className={`${col} trailer`}>
           <img src={props.infor?.image}  alt="anh"/>
           <div className="booking">
@@ -38,23 +40,10 @@ windowDimensions.width <= 815 ?  col = "col-12" : col = "col-6";
                 <i className="fas fa-money-check"></i>BOOKING
               </button>
             </a>
-              <button type="button" className="btn--trailer" data-toggle="modal" data-target=".bd-example-modal-lg">
+              <button type="button" className="btn--trailer" onClick={()=> setOpen(true)}>
                 <i className="fas fa-play"></i>
                 TRAILER
               </button>
-              <div
-                className="modal fade bd-example-modal-lg"
-                tabIndex={-1}
-                role="dialog"
-                aria-labelledby="myLargeModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog modal-lg">
-                  <div className="modal-content">
-                    <ReactPlayer width="100%" height="460px" controls url={props.infor?.trailer}/>
-                </div>
-                </div>
-              </div>
           </div>
         </div>
         <div className={`${col} detail__text`}>
