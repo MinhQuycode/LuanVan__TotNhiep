@@ -31,9 +31,9 @@ export default function InfoAccount(props) {
         <div className="col-8 info__user">
           <p>Tên : {name}</p>
           <p>Email : {email}</p>
-          <p>SĐT : {!phone_number ? "Bạn có thể thêm vào !" : phone_number}</p>
-          <p>Địa chỉ : {!address ? "Bạn có thể thêm vào !" : address}</p>
-          <p>Ngày sinh :{!birthday ? "Bạn có thể thêm vào" : birthday?.substring(8,11)}-{birthday?.substring(5,8)}{birthday?.substring(0,4)}</p>
+          <p>SĐT : {!phone_number ? "Chưa cập nhật !" : phone_number}</p>
+          <p>Địa chỉ : {!address ? "Chưa cập nhật !" : address}</p>
+          <p>Ngày sinh :{!birthday ? "Chưa cập nhật !" : birthday?.substring(8,11)}{birthday?.substring(4,8)}{birthday?.substring(0,4)}</p>
           {/* <button
             className="btn__info"
             onClick={() => {
