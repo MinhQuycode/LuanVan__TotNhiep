@@ -14,8 +14,10 @@ import NameChair from "./NameChair";
 export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
   let chairList = useSelector((state) => state.chair.chairList);
+  console.log(chairList)
   let error = useSelector((state) => state.chair.error);
   const { id } = useParams();
+  // console.log(id)
   const userSignIn = JSON.parse(localStorage.getItem('userLogin'));
   const dispatch = useDispatch();
   useEffect(() => {

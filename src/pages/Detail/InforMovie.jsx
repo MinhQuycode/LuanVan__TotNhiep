@@ -59,7 +59,7 @@ let trailer = `${props.infor?.trailer.slice(32)}`
             <span>Thể loại :</span> {!props.infor?.type ? "Lãng mạn": `${props.infor?.type}` } 
           </p>
           <p>
-            <span>Diễn viên :</span> {!props.infor?.director ? "Trấn Thành" : `${props.infor?.directors}` } 
+            {!props.infor?.directors ? ("") : (<><span>Diễn viên :</span> {props.infor?.directors}</> ) }
           </p>
           <p>
             <span>Ngày khởi chiếu :</span> {props.infor?.release_date}

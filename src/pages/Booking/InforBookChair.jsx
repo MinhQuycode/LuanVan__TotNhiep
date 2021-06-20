@@ -16,7 +16,7 @@ export default function InforBookChair(props) {
   // Mã lịch chiếu
   const { id } = useParams();
   const maLichChieu = id;
-
+console.log(typeof maLichChieu)
   // Lấy Id user
   const user_id = useSelector(state => state.account.account.id);
   const user_name = useSelector(state => state.account.account.name);
@@ -76,6 +76,7 @@ export default function InforBookChair(props) {
       }
     })
 }
+console.log(maLichChieu,totalAmount,quantity,danhSachVe,user_id,user_email,user_name);
 useEffect(() => {
   if(resMessage === "fails"){
     Swal.fire({
