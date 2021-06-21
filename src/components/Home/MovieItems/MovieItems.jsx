@@ -1,6 +1,6 @@
 import React,{memo} from 'react'
-import star1 from '../../../assets/images/star1.png'
-import star2 from '../../../assets/images/star2.png'
+// import star1 from '../../../assets/images/star1.png'
+// import star2 from '../../../assets/images/star2.png'
 import {useHistory} from "react-router-dom";
 
 function MovieItems(props) {
@@ -24,13 +24,11 @@ function MovieItems(props) {
             <div className="nameMovie">
                 {props.item.name}
             </div>
-            {/* <div className="showing__point">
-                <span>{Math.floor(Math.random() * 10)}</span>
+            <div className="showing__point">
                 <div className="star">
-                    <img src={star1} alt="star"/>
-                    <img src={star2} alt="star2"/>
-                </div>
-            </div> */}
+                    {props.item.time}
+                </div> 
+            </div>
         </div>
         <div className="showing__btn">
             <button className="btn__movie" onClick={()=>{
