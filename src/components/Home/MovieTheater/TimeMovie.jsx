@@ -93,7 +93,6 @@ function TimeMovie() {
                       return item
                         .filter((date) => date.movies_id === img.id)
                         .map((times, index) => {
-                          console.log(times.id)
                           return (
                                 <button
                                   key={index}

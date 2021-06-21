@@ -13,11 +13,11 @@ export default function ChangeAccount(props) {
   const { name, email, phone_number, address, birthday, gender } = props.info;
   const [infoChange, setinfoChange] = useState({
     values: {
-      name: name,
-      phone_number: phone_number,
-      address: address,
-      birthday: birthday,
-      gender: gender,
+      name: name ? name : "",
+      phone_number: phone_number ? phone_number : "",
+      address: address ? address : "",
+      birthday: birthday ? birthday : "",
+      gender: gender ? gender : "Nam",
       current_password: "",
       new_password: "",
       confirm_password: "",
@@ -29,8 +29,9 @@ export default function ChangeAccount(props) {
       confirm_password: "",
     },
   });
+  console.log(infoChange.values);
   const handleChange = (event) => {
-    const { name, value, type } = event.target;
+    const { name, value} = event.target;
     let newValue = { ...infoChange.values, [name]: value };
     let newError = { ...infoChange.errors };
 
@@ -68,14 +69,18 @@ export default function ChangeAccount(props) {
     }
     
     // Check birthday
-    // if(name === "birthday") {
-    //   const parternBirthday = /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/;
-    //   if(!parternBirthday.test(value)){
-    //     newError[name] = "* VD: 04/03/1999";
-    //   } else {
-    //     newError[name]= "";
-    //   }
-    // }
+    if(name === "birthday") {
+      const parternBirthday = /([12]\d{3}[\/](0[1-9]|1[0-2])[\/](0[1-9]|[12]\d|3[01]))/;
+      if(!parternBirthday.test(value)){
+        newError[name] = "* VD: 1999/12/28";
+      } else {
+        newError[name]= "";
+      }
+      if(value ===""){
+        newError[name] = "";
+      }
+    }
+
     setinfoChange ({
       values :newValue,
       errors :newError,
@@ -159,7 +164,7 @@ export default function ChangeAccount(props) {
     >
       <p className="tiltle__content">Thay đổi tài khoản</p>
       {loading ? (<LoadingUpdate/>) : (
-      <form className="changeAccount" noValidate onSubmit={handleSubmit}>
+      <form className="changeAccount form-group" noValidate autoComplete="on" onSubmit={handleSubmit}>
         <div className="row row--change">
           <div className="col-4">
             <p>Tên</p>

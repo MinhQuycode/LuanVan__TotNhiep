@@ -64,12 +64,6 @@ const chairListReducer = (state = initialState, action) => {
       state.error = null;
       return { ...state };
 
-    // case BOOK_TICKET_REQUEST:
-    //   state.loading1 = true;
-    //   state.response = null;
-    //   state.error = null;
-    //   return { ...state };
-
     case BOOK_TICKET_FAILED:
       state.loading = false;
       state.response = null;

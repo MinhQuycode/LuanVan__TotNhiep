@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import PropTypes from "prop-types";
 
 function ErrorRgt(props) {
     const messages = "Email đã tồn tại !"
@@ -9,8 +8,5 @@ function ErrorRgt(props) {
     return <div></div>
   }
 }
-ErrorRgt.propTypes = {
-  messages: PropTypes.string.isRequired,
-};
 
 export default memo(ErrorRgt);

@@ -15,7 +15,8 @@
     }
     .showing__head{
         display: flex;
-        justify-content: space-around;
+        justify-content: start;
+        align-items: center;
         position: relative;
         width: 100%;
         margin-top: 15px;
@@ -26,7 +27,7 @@
         line-height: 20px;
         .nameMovie{
             white-space: nowrap; 
-            max-width: 150px; 
+            max-width: 219px; 
             overflow: hidden;
             text-overflow: ellipsis; 
         }
