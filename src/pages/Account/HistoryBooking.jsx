@@ -183,7 +183,7 @@ export default function HistoryBooking(props) {
         <p className="tiltle__content">Mã đặt vé - #{bookingCode}</p>
         <div className="detail_tick">
           <p className="content__tick">
-            Ngày mua hàng : Ngày {stringDay?.substring(10,12)} tháng {stringDay?.substring(7,9)} năm {stringDay?.substring(2,6)}
+            Ngày đặt vé : Ngày {stringDay?.substring(10,12)} tháng {stringDay?.substring(7,9)} năm {stringDay?.substring(2,6)}
           </p>
           <div className="tick__item row ">
             <div className="col-5">

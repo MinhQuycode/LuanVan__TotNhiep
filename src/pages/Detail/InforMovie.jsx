@@ -71,7 +71,7 @@ let trailer = `${props.infor?.trailer.slice(32)}`
             <span>Ngôn ngữ :</span> {props.infor?.language}
           </p>
           <p>
-            <span style={{color:"red"}}>Phân loại :</span> <span style={{color:"red", fontSize:"14px"}}>{props.infor?.age_type}</span>
+            <span style={{color:"red", fontSize:"14px"}}>{props.infor?.age_type}</span>
           </p>
         </div>
       </div>

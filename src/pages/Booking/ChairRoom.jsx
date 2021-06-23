@@ -14,6 +14,7 @@ export default function ChairRoom(props) {
         let theMiddle = Math.floor(chair.length / 2);
         return (
             chair?.map((item,index) =>{
+                console.log(item)
                 let disabled = false;
                 let loaiGhe = "";
                 if(item.seat_type.type === "standard"){

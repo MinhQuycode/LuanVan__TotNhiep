@@ -26,9 +26,9 @@ export default function Account() {
       <ScrollToTop />
       <div className="container">
         <div className="account--user row">
-        <div className="col-3 tiltle__user">
-            <div className="list-group" id="list-tab" role="tablist">
-              <span className="tiltle">TÀI KHOẢN CỦA BẠN</span>
+        <div className="col-md-12 col-lg-3 tiltle__user">
+            <p className="tiltle text-center">TÀI KHOẢN CỦA BẠN</p>
+            <div className="list-group list--item" id="list-tab" role="tablist">
               <a
                 className={`list-group-item list-group-item-action active`}
                 id="list-home-list"
@@ -61,7 +61,7 @@ export default function Account() {
               </a>
             </div>
           </div>
-          <div className="col-9 tiltle__contents">
+          <div className="col-md-12 col-lg-9 tiltle__contents">
             <div className="tab-content" id="nav-tabContent">
              <InfoAccount info={info}/>
              <ChangeAccount info={info}/>

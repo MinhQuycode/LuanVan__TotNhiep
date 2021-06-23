@@ -166,7 +166,7 @@ export default function ChangeAccount(props) {
       {loading ? (<LoadingUpdate/>) : (
       <form className="changeAccount form-group" noValidate autoComplete="on" onSubmit={handleSubmit}>
         <div className="row row--change">
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Tên</p>
             <input
               onChange={handleChange}
@@ -175,7 +175,7 @@ export default function ChangeAccount(props) {
               placeholder={name}
             />
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Email</p>
             <input
               onChange={handleChange}
@@ -185,7 +185,7 @@ export default function ChangeAccount(props) {
             />
             <p className="text text-danger">{infoChange.errors.email}</p>
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Địa chỉ</p>
             <input
               onChange={handleChange}
@@ -194,7 +194,7 @@ export default function ChangeAccount(props) {
               placeholder={address}
             />
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Số điện thoại</p>
             <input
               onChange={handleChange}
@@ -203,7 +203,7 @@ export default function ChangeAccount(props) {
             />
             <p className="text text-danger">{infoChange.errors.phone_number}</p>
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Ngày sinh</p>
             <input
               onChange={handleChange}
@@ -212,7 +212,7 @@ export default function ChangeAccount(props) {
             />
             <p className="text text-danger">{infoChange.errors.birthday}</p>
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>Giới tính</p>
             <select name="gender" defaultValue={gender} onChange={handleChange}>
               <option disabled>{gender?gender:"Chọn"}</option>
@@ -221,7 +221,7 @@ export default function ChangeAccount(props) {
               <option value="Khác">Khác</option>
             </select>
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>
               Mật khẩu cũ <b>*</b>
             </p>
@@ -247,7 +247,7 @@ export default function ChangeAccount(props) {
           ></input>
         </div>
         <div className="row collapse multi-collapse" id="change">
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>
               Mật khẩu mới <b>*</b>
             </p>
@@ -258,7 +258,7 @@ export default function ChangeAccount(props) {
             />
             <p className="text text-danger mr-5">{infoChange.errors.new_password}</p>
           </div>
-          <div className="col-4">
+          <div className="col-sm-6 col-md-4">
             <p>
               Nhập lại mật khẩu mới<b>*</b>
             </p>

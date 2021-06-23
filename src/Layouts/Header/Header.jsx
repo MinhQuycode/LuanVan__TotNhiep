@@ -62,15 +62,15 @@ function Header(props) {
           className="navbar-toggler mr-3"
           type="button"
           data-toggle="collapse"
-          data-target="#collapsibleNavbar"
+          data-target="#menuMovie"
         >
           <span className="font-weight-bold navbar-toggler-icon btn--menu" />
         </button>
-        <div className="myMenu collapse navbar-collapse" id="collapsibleNavbar">
+        <div className="myMenu collapse navbar-collapse" id="menuMovie">
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/#slide__movie" replace={isHashLink}>
-                Lịch Chiếu
+                Phim chiếu
               </Link>
             </li>
             <li className="nav-item">

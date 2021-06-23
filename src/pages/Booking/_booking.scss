@@ -12,7 +12,7 @@
       flex-direction: column;
       span{
         color: black;
-        font-size: 20px;
+        font-size: 19px;
         font-weight: bold;
         padding-left: 20px;
         padding-top: 7px;
@@ -158,8 +158,13 @@
           height: 20px;
         }
         .pay__figure {
-          width: 30px;
+          display: inherit;
+          width: 75px;
           margin: 0 10px;
+          span{
+            font-weight: bold;
+            margin-left: 2rem;
+          }
         }
       }
     }
@@ -183,6 +188,19 @@
   @media only screen and (max-width: 991px) {
     .infor__booking {
       margin-top: 2rem;
+    }
+  }
+  @media only screen and (max-width: 790px) {
+    .chairlist { 
+    width: 483px !important;
+      .gheGiua {
+        margin-right: 10px !important;
+      }
+    }
+  }
+  @media only screen and (max-width: 677px) {
+    .name--chair{
+      display: none !important;
     }
   }
 }
