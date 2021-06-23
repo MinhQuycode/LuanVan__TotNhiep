@@ -4,7 +4,6 @@ import React,{memo} from 'react'
 import {useHistory} from "react-router-dom";
 
 function MovieItems(props) {
-    console.log(props.item)
     const history = useHistory();
     
     const handleClickMovie = (idMovie) =>{

@@ -67,7 +67,11 @@
     .footer__item__4 {
         .text-right {
             text-align: center !important;
+            ul:first-child{
+                display: none;
+            }
             ul{
+                margin-bottom: 0 !important;
                 flex-direction: column;
                 li {
                     a {
