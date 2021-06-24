@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {bookingTicketAPI,resetReducerChair, stopTimeBooking} from "./../../redux/actions/booking.action";
 import atm from "./../../assets/images/logoVNpay.png";
 import Swal from "sweetalert2";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { getInforAccountAPI } from "../../redux/actions/inforAccount.action";
 import { payMoneyAPI } from "../../redux/actions/payMoney.action";
 
@@ -12,6 +12,7 @@ export default function InforBookChair(props) {
   const {info} = props;
   const history = useHistory();
   const chairBooking = useSelector((state) => state.chair.chairBooking);
+  const statePay = useSelector(state => state.pay.response);
   const dispatch = useDispatch();
   // Mã lịch chiếu
   const { id } = useParams();
@@ -39,13 +40,20 @@ export default function InforBookChair(props) {
   //Tổng tiền
   let totalAmount = parseInt(tongTien());
 
-  // let amountTT = document.getElementById("tien").getAttribute("value");
+  let amountTT = document.getElementById("tien")?.getAttribute("value");
+  let dayCode = document.getElementById("codeDay")?.getAttribute("value");
+
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+  const dateCode = dateTime.replace(/[^a-zA-Z0-9]/g, '')
   //get data form pay money
   const [dataPay, setDataPay] = useState({
     values : {
       order_type : "Vé xem phim",
-      order_id: "",
-      amount: 0,
+      order_id: dayCode,
+      amount: amountTT,
       order_desc: "",
       bank_code:"NCB",
       language : "vn",
@@ -53,13 +61,19 @@ export default function InforBookChair(props) {
   })
   const handleChange = (event) => {
     const { name, value} = event.target;
-    let newValue = { ...dataPay.values,[name]: value};
     
     setDataPay ({
-      values :newValue
+      values : {
+      order_type : "Vé xem phim",
+      order_id: dayCode,
+      amount: amountTT,
+      order_desc: value,
+      bank_code:"NCB",
+      language : "vn",
+      }
    });
   }
-  console.log(dataPay)
+  // console.log(dataPay)
 
   useEffect(() => {
     dispatch(getInforAccountAPI())
@@ -96,17 +110,21 @@ export default function InforBookChair(props) {
     user_id : user_id,
     user_email : user_email,
     user_name : user_name,
-  },
+  }, 
     dataNew
   };
 
-  // console.log(dataForm);
-
+  //save dataBooking sessionStorage
+  sessionStorage.setItem("dataBooking",JSON.stringify(dataForm.dataBooking));
   const handleSubmit = (event) =>{
     event.preventDefault();
     dispatch(payMoneyAPI(dataForm));
   }
-
+  //save link localStorage
+  localStorage.setItem("payLink",JSON.stringify(statePay));
+  if(statePay){
+    history.push("/pay");
+  }
 
   // Lấy message từ API booking
   const message = useSelector(state => state.chair.response);
@@ -269,16 +287,16 @@ useEffect(() => {
                 <div className="row">
                   <div className="col-6  pl-0 form-group">
                     <label htmlFor="maBooking" className="font-weight-bold text-success">Mã đặt vé</label>
-                    <input onChange={handleChange} type="text" name="order_id" className="form-control" id="maBooking" placeholder="657"/>
+                    <input onChange={handleChange} disabled type="text" name="order_id" className="form-control" id="codeDay" value={dateCode}/>
                   </div>
                   <div className="col-6 pr-0 form-group">
                     <label htmlFor="tongTien" className="font-weight-bold text-success">Tổng tiền</label>
-                    <input id="tien" onChange={handleChange} type="text" name="amount" className="form-control"/>
+                    <input id="tien" onChange={handleChange} disabled type="text" name="amount" className="form-control" value={totalAmount*1000}/>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="noiDung" className="font-weight-bold text-success">Nội dung thanh toán</label>
-                  <textarea onChange={handleChange} name="order_desc" type="text" className="form-control" id="noiDung" placeholder="Thanh toán vì đam mê"/>
+                  <textarea onChange={handleChange} name="order_desc" type="text" className="form-control" id="noiDung" placeholder="Mời bạn nhập nội dung cần thanh toán !"/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="nganHang" className="font-weight-bold text-success">Ngân hàng</label>
@@ -289,7 +307,8 @@ useEffect(() => {
                   <input disabled onChange={handleChange} name="language" type="text" className="form-control" id="ngonNgu" value="Tiếng Việt"/>
                 </div>
                 <div>
-                <button type="submit" className="btn btn-danger">ĐẶT VÉ</button>
+                <button type="submit" className="btn btn-danger">ĐẶT VÉ
+                </button>
                 <a className="btn btn-success ml-2" data-dismiss="modal">ĐÓNG</a>
                 </div>
               </form>

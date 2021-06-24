@@ -29,7 +29,7 @@ export const payMoneyRequest = () => {
       try {
         const res = await axios({ 
           method: "POST",
-          url: `https://cinemasummary.herokuapp.com/api/postpayment`,
+          url: `https://cinemasummary.herokuapp.com/api/booking`,
           data: dataForm
         });
         dispatch(payMoneySuccess(res.data));
