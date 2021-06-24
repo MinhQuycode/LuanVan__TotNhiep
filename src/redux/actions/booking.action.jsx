@@ -93,7 +93,7 @@ export const bookingTicketAPI = (
   user_name
 ) => {
   return async (dispatch) => {
-    // dispatch(bookingTicketRequest())
+    dispatch(bookingTicketRequest())
     try {
       const res = await axios({
         method: "POST",

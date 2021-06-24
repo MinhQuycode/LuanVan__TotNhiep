@@ -1,10 +1,11 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {bookingTicketAPI,resetReducerChair, stopTimeBooking} from "./../../redux/actions/booking.action";
 import atm from "./../../assets/images/logoVNpay.png";
 import Swal from "sweetalert2";
 import { useHistory, useParams } from "react-router-dom";
 import { getInforAccountAPI } from "../../redux/actions/inforAccount.action";
+import { payMoneyAPI } from "../../redux/actions/payMoney.action";
 
 
 export default function InforBookChair(props) {
@@ -15,11 +16,51 @@ export default function InforBookChair(props) {
   // Mã lịch chiếu
   const { id } = useParams();
   const maLichChieu = id;
-console.log(typeof maLichChieu)
   // Lấy Id user
   const user_id = useSelector(state => state.account.account.id);
   const user_name = useSelector(state => state.account.account.name);
   const user_email = useSelector(state => state.account.account.email);
+  //get value input radio
+  const [inputValue, setinputValue] = useState({value : "VNPAY"})
+  const changeHandle = (event) =>{
+    const {value} = event.target;
+    setinputValue({
+      value : value
+    })
+  }
+  // tính tổng tiền
+  const tongTien = () =>{
+    return (
+        chairBooking.reduce((tongTien , gheDangDat) =>{
+            return (tongTien += gheDangDat.giaVe)
+        },0).toLocaleString()
+    )
+}
+  //Tổng tiền
+  let totalAmount = parseInt(tongTien());
+
+  // let amountTT = document.getElementById("tien").getAttribute("value");
+  //get data form pay money
+  const [dataPay, setDataPay] = useState({
+    values : {
+      order_type : "Vé xem phim",
+      order_id: "",
+      amount: 0,
+      order_desc: "",
+      bank_code:"NCB",
+      language : "vn",
+    }
+  })
+  const handleChange = (event) => {
+    const { name, value} = event.target;
+    let newValue = { ...dataPay.values,[name]: value};
+    
+    setDataPay ({
+      values :newValue
+   });
+  }
+  console.log(dataPay)
+
   useEffect(() => {
     dispatch(getInforAccountAPI())
   },[])
@@ -29,16 +70,8 @@ console.log(typeof maLichChieu)
       return <p style={{color:"orangered"}} key={index}>{item.hang.concat(item.tenGhe)}</p>;
     });
   };
-// tính tổng tiền
-  const tongTien = () =>{
-      return (
-          chairBooking.reduce((tongTien , gheDangDat) =>{
-              return (tongTien += gheDangDat.giaVe)
-          },0).toLocaleString()
-      )
-  }
-  //Tổng tiền okee
-  let totalAmount = parseInt(tongTien());
+
+
   //Danh sach vé
   const danhSachVe = chairBooking.map((ve) => (
     {
@@ -51,6 +84,30 @@ console.log(typeof maLichChieu)
     var quantity = null,
     quantity = danhSachVe.length;
   }
+
+  //Submit API pay money
+  let dataNew = dataPay.values;
+  const dataForm = {
+    dataBooking : {
+    maLichChieu : maLichChieu,
+    totalAmount : totalAmount,
+    quantity : quantity,
+    danhSachVe : danhSachVe,
+    user_id : user_id,
+    user_email : user_email,
+    user_name : user_name,
+  },
+    dataNew
+  };
+
+  // console.log(dataForm);
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    dispatch(payMoneyAPI(dataForm));
+  }
+
+
   // Lấy message từ API booking
   const message = useSelector(state => state.chair.response);
   var resMessage = message?.status;
@@ -163,23 +220,38 @@ useEffect(() => {
               <input
                 className="radio__item--input"
                 type="radio"
-                checked
-                name="howtopay"
-                id="ATM"
-                defaultValue="ATM"
+                defaultChecked
+                name="radioInput"
+                id="ANPAY"
+                defaultValue="VNPAY"
+                onChange={changeHandle}
               />
                 <div className="pay__figure">
-                  <img src={atm} alt="ATM" />
+                  <img src={atm} alt="ATM"/>
                 <span className="pay__text">VNPAY</span>
+                </div>
+            </div>
+            <div className="radio__item">
+              <input
+                className="radio__item--input"
+                type="radio"
+                name="radioInput"
+                id="nhan"
+                defaultValue="NHANHANG"
+                onChange={changeHandle}
+              />
+                <div>
+                <p style={{marginLeft:"1rem",lineHeight:"40px",paddingTop:"5px"}} className="pay__text">Thanh toán khi nhận vé</p>
                 </div>
             </div>
         </div>
       </div>
       <button disabled={check} className="btn__booking mt-4" data-toggle="modal" data-target="#thanhtoan" 
-        onClick={()=>{{submitAPI()}}}
+        onClick={()=>inputValue.value === "NHANHANG" ? submitAPI() : ""}
       >THANH TOÁN</button>
       {/* Modal thanh toán */}
-      {/* <div className="modal fade" id="thanhtoan" tabIndex={-1} role="dialog" aria-hidden="true">
+      {inputValue.value === "VNPAY" ? (
+      <div className="modal fade" id="thanhtoan" tabIndex={-1} role="dialog" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -189,44 +261,42 @@ useEffect(() => {
               </button>
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="loaiHang" className="font-weight-bold text-success">Loại hàng hóa</label>
-                  <input type="text" className="form-control" id="loaiHang" placeholder="Vé xem phim"/>
+                  <input disabled onChange={handleChange} type="text" name="order_type" className="form-control" id="loaiHang" value="Vé xem phim"/>
                 </div>
                 <div className="row">
                   <div className="col-6  pl-0 form-group">
                     <label htmlFor="maBooking" className="font-weight-bold text-success">Mã đặt vé</label>
-                    <input type="text" className="form-control" id="maBooking" placeholder="657"/>
+                    <input onChange={handleChange} type="text" name="order_id" className="form-control" id="maBooking" placeholder="657"/>
                   </div>
                   <div className="col-6 pr-0 form-group">
                     <label htmlFor="tongTien" className="font-weight-bold text-success">Tổng tiền</label>
-                    <input type="text" className="form-control" id="tongTien" placeholder="100000"/>
+                    <input id="tien" onChange={handleChange} type="text" name="amount" className="form-control"/>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="noiDung" className="font-weight-bold text-success">Nội dung thanh toán</label>
-                  <textarea type="text" className="form-control" id="noiDung" placeholder="Thanh toán vì đam mê"/>
+                  <textarea onChange={handleChange} name="order_desc" type="text" className="form-control" id="noiDung" placeholder="Thanh toán vì đam mê"/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="nganHang" className="font-weight-bold text-success">Ngân hàng</label>
-                  <input type="text" className="form-control" id="nganHang" placeholder="Không chọn"/>
+                  <input disabled onChange={handleChange} name="bank_code" type="text" className="form-control" id="nganHang" value="NCB"/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="ngonNgu" className="font-weight-bold text-success">Ngôn ngữ</label>
-                  <input type="text" className="form-control" id="ngonNgu" placeholder="Tiếng việt"/>
+                  <input disabled onChange={handleChange} name="language" type="text" className="form-control" id="ngonNgu" value="Tiếng Việt"/>
+                </div>
+                <div>
+                <button type="submit" className="btn btn-danger">ĐẶT VÉ</button>
+                <a className="btn btn-success ml-2" data-dismiss="modal">ĐÓNG</a>
                 </div>
               </form>
             </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-success" data-dismiss="modal">ĐÓNG</button>
-              <button type="button" className="btn btn-danger" data-dismiss="modal"
-                  onClick={()=>{{submitAPI()}}}
-              >ĐẶT VÉ</button>
-            </div>
           </div>
         </div>
-      </div> */}
+      </div>):""}
     </div>
   ) 
 }

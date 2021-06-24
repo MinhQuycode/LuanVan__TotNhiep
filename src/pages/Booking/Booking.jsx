@@ -14,7 +14,6 @@ import NameChair from "./NameChair";
 export default function Booking(props) {
   let inforBK = useSelector((state) => state.chair.inforBooking);
   let chairList = useSelector((state) => state.chair.chairList);
-  console.log(chairList)
   let error = useSelector((state) => state.chair.error);
   const { id } = useParams();
   // console.log(id)
@@ -52,7 +51,7 @@ export default function Booking(props) {
       var result = chunkArray(listChair1,14);
       break;  
     default:
-      console.log("Không tồn tại mảng ghế !")
+      console.log("")
       break;
   }
 
@@ -78,7 +77,7 @@ export default function Booking(props) {
                 <p>{inforBK?.diaChi}</p>
               </div>
             </div>
-            <TimeBooking/>
+            {/* <TimeBooking/> */}
           </div>
           <div className="row screen">
             <img src={screen} alt="anh"/>

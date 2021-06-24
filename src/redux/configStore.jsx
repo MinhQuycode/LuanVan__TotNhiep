@@ -12,6 +12,7 @@ import movieSearch from "./reducers/searchMovie.reducer";
 import inforAcountReducer from "./reducers/inforAccount.reducer";
 import detailTicketReducer from "./reducers/detailTicketUser.reducer";
 import updateInfoReducer from "./reducers/updateInfo.reducer";
+import payMoneyReducer from "./reducers/payMoney.reducer";
 
 const rootReducer = combineReducers({
   //reducer khai báo tại đây
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   movieSearch : movieSearch,
   account : inforAcountReducer,
   ticket : detailTicketReducer,
-  update : updateInfoReducer
+  update : updateInfoReducer,
+  pay : payMoneyReducer
 });
 
 //Tham số thứ 2 của midleware khai báo tại đây

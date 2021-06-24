@@ -58,14 +58,20 @@ const chairListReducer = (state = initialState, action) => {
       state.chairBooking = chairBookingNew;
       return { ...state };
 
+    case BOOK_TICKET_REQUEST:
+      state.loading1 = true;
+      state.response = null;
+      state.error = null;
+      return { ...state };
+
     case BOOK_TICKET_SUCCESS:
-      state.loading = false;
+      state.loading1 = false;
       state.response = payload;
       state.error = null;
       return { ...state };
 
     case BOOK_TICKET_FAILED:
-      state.loading = false;
+      state.loading1 = false;
       state.response = null;
       state.error = payload;
       return { ...state };
