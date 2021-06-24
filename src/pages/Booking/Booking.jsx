@@ -77,7 +77,7 @@ export default function Booking(props) {
                 <p>{inforBK?.diaChi}</p>
               </div>
             </div>
-            {/* <TimeBooking/> */}
+            <TimeBooking/>
           </div>
           <div className="row screen">
             <img src={screen} alt="anh"/>
