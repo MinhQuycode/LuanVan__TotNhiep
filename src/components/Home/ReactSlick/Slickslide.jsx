@@ -63,7 +63,7 @@ function Slickslide(props) {
         <section id="slide__movie">
             <ul className="nav nav-pills justify-content-center title">
                 <li className="nav-item">
-                    <a className="nav-link active" data-toggle="pill" href="#dangChieu" style={{color:'orangered',fontWeight:"bold"}}>Đang chiếu</a>
+                    <a className="nav-link active" data-toggle="pill" href="#dangChieu" style={{color:'orangered',fontWeight:"bold"}}>Danh sách phim</a>
                 </li>
             </ul>
             <div className="tab-content slideMovie__item">

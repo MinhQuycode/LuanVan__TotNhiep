@@ -37,9 +37,9 @@ export default function ChangeAccount(props) {
 
     // Check new_password
     if(name === "new_password"){
-      const parterPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      const parterPass = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
       if(!parterPass.test(value)){
-        newError[name] = "Mật khẩu ít nhất 8 ký tự, 1 số, 1 chữ hoa và 1 thường!"
+        newError[name] = "Mật khẩu ít nhất 8 ký tự, 1 số, 1 chữ hoa, 1 thường và 1 ký tự đặc biệt !"
       } else{
         newError[name]= "";
       }
