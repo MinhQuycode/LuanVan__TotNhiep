@@ -194,7 +194,7 @@ export default function HistoryBooking(props) {
             </div>
             <div className="col-5">
               <b>Phương thức thanh toán</b>
-              <p>VNPAY</p>
+              <p>Thanh toán khi nhận vé</p>
             </div>
             <div className="col-2">
               <button
